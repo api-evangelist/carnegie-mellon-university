@@ -1,0 +1,55 @@
+---
+name: Carnegie Mellon University
+description: Carnegie Mellon University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      CMU has no single central developer portal, but a genuinely strong
+      public research-API footprint. Verified live: the Delphi Epidata API
+      returns real JSON (covidcast_meta and fluview both 200) with full docs
+      and an active GitHub org (cmu-delphi); the KiltHub OAI-PMH endpoint on
+      figshare returns valid OAI-PMH XML with real CMU records in set
+      portal_231; and the Shibboleth Web Login identity provider metadata
+      resolves. The Heinz College courses_api now 302-redirects to a student
+      web page and is no longer a usable public API, so it was excluded. The
+      Schedule of Classes is a servlet web app, not a documented API, so it was
+      not cataloged as an API. No fabricated endpoints; only verified URLs and
+      properties are included.
+    endpoints:
+      - url: https://api.delphi.cmu.edu/epidata/covidcast_meta/
+        status: 200
+        note: Delphi Epidata API returns live JSON metadata
+      - url: https://api.delphi.cmu.edu/epidata/fluview/?regions=nat&epiweeks=202001
+        status: 200
+        note: Delphi fluview endpoint returns data
+      - url: https://cmu-delphi.github.io/delphi-epidata/
+        status: 200
+        note: Delphi Epidata API documentation portal
+      - url: https://github.com/cmu-delphi
+        status: 200
+        note: Delphi group GitHub org (clients and source)
+      - url: https://api.figshare.com/v2/oai?verb=ListRecords&metadataPrefix=oai_dc&set=portal_231
+        status: 200
+        note: KiltHub OAI-PMH CMU set returns real records
+      - url: https://kilthub.cmu.edu/
+        status: 202
+        note: KiltHub institutional repository (figshare-hosted)
+      - url: https://login.cmu.edu/idp/shibboleth
+        status: 200
+        note: Shibboleth identity provider metadata endpoint
+      - url: https://api.heinz.cmu.edu/courses_api/course_list/
+        status: 302
+        note: Former Heinz courses API now redirects to student web page; excluded
+      - url: https://enr-apps.as.cmu.edu/open/SOC/SOCServlet
+        status: 200
+        note: Schedule of Classes servlet UI, not a documented API
+      - url: https://github.com/cmu-lib
+        status: 200
+        note: CMU University Libraries GitHub org
+      - url: https://www.cmu.edu/
+        status: 200
+        note: Official university website

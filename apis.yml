@@ -1,0 +1,103 @@
+---
+aid: carnegie-mellon-university
+name: Carnegie Mellon University
+description: >-
+  Carnegie Mellon University is a private research university in Pittsburgh,
+  Pennsylvania, United States, ranked #50 in the QS World University Rankings
+  2025. Its public developer and API footprint is concentrated in research and
+  library infrastructure rather than a single central developer portal. The
+  most prominent public API is the Delphi Epidata API, a real-time
+  epidemiological data API maintained by CMU's Delphi research group. The
+  University Libraries operate the KiltHub institutional repository (hosted on
+  figshare) which exposes research data and scholarly outputs via OAI-PMH and
+  the figshare REST API, and CMU runs a campus-wide Shibboleth/Web Login
+  single sign-on identity service.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - United States
+  - Research
+  - Epidemiology
+  - Open Data
+  - Library
+  - Institutional Repository
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: carnegie-mellon-university:delphi-epidata
+    name: Delphi Epidata API
+    description: >-
+      Public, anonymously accessible HTTP/JSON API maintained by the Carnegie
+      Mellon University Delphi research group providing real-time and
+      historical epidemiological surveillance data, including the COVIDcast
+      endpoint and a range of disease signals (influenza, dengue, norovirus
+      and more). R and Python clients are available. Verified returning live
+      JSON at the base URL.
+    humanURL: https://cmu-delphi.github.io/delphi-epidata/
+    baseURL: https://api.delphi.cmu.edu/epidata/
+    tags: [ Epidemiology, Health Data, Research, Open Data, Public Health ]
+    properties:
+      - type: Documentation
+        url: https://cmu-delphi.github.io/delphi-epidata/
+      - type: GitHub
+        url: https://github.com/cmu-delphi/delphi-epidata
+  - aid: carnegie-mellon-university:kilthub-oai-pmh
+    name: KiltHub Repository OAI-PMH (figshare)
+    description: >-
+      OAI-PMH metadata harvesting endpoint for CMU's KiltHub institutional
+      repository, the University Libraries' platform for research data and
+      scholarly outputs, hosted on figshare. The CMU-scoped set (portal_231)
+      returns institution records and the endpoint is verified returning valid
+      OAI-PMH XML. The underlying figshare v2 REST API is also publicly
+      reachable.
+    humanURL: https://guides.library.cmu.edu/kilthub
+    baseURL: https://api.figshare.com/v2/oai
+    tags: [ Institutional Repository, Research Data, OAI-PMH, Library, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://docs.figshare.com/#oai_pmh
+      - type: Website
+        url: https://kilthub.cmu.edu/
+  - aid: carnegie-mellon-university:web-login-sso
+    name: CMU Web Login (Shibboleth SSO)
+    description: >-
+      Carnegie Mellon's campus-wide single sign-on identity service based on
+      Shibboleth/SAML, used by service providers to authenticate authorized
+      users. The identity provider metadata endpoint is publicly reachable.
+      This is an authentication service for affiliated service providers rather
+      than an open public data API.
+    humanURL: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+    baseURL: https://login.cmu.edu/idp/shibboleth
+    tags: [ Identity, Authentication, SSO, Shibboleth, SAML ]
+    properties:
+      - type: Documentation
+        url: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+common:
+  - type: Website
+    url: https://www.cmu.edu/
+  - type: GitHub
+    url: https://github.com/cmu-delphi
+  - type: SourceCode
+    url: https://github.com/cmu-lib
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/carnegie-mellon-university/
+  - type: Authentication
+    url: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+  - type: Plans
+    url: plans/carnegie-mellon-university-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/carnegie-mellon-university-rate-limits.yml
+  - type: FinOps
+    url: finops/carnegie-mellon-university-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
