@@ -1,0 +1,53 @@
+formats: [oas3]
+rules:
+  cmu-info-contact:
+    description: API info object should provide contact information.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  cmu-info-description:
+    description: API info object should have a description.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  cmu-servers-https:
+    description: figshare KiltHub-backing API servers should use HTTPS.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  cmu-operation-tags:
+    description: Every operation should be tagged so endpoints are grouped (articles, collections, etc.).
+    severity: warn
+    given: $.paths[*][get,post,put,delete]
+    then:
+      field: tags
+      function: truthy
+  cmu-article-doi-present:
+    description: Article response schemas should expose a DOI property (persistent identifier convention).
+    severity: warn
+    given: $.components.schemas.Article.properties
+    then:
+      field: doi
+      function: truthy
+  cmu-article-public-url:
+    description: Article schemas should expose a public HTML url for citation/discovery.
+    severity: warn
+    given: $.components.schemas.Article.properties
+    then:
+      field: url_public_html
+      function: truthy
+  cmu-snake-case-fields:
+    description: figshare object fields follow snake_case naming.
+    severity: info
+    given: $.components.schemas.Author.properties.*~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"

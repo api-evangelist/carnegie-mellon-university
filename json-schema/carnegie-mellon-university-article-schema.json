@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/main/json-schema/carnegie-mellon-university-article-schema.json",
+  "title": "KiltHub Article (figshare public research output)",
+  "description": "JSON Schema for a public article (research output / dataset) as returned by the figshare v2 REST API that backs Carnegie Mellon University's KiltHub institutional repository. Derived faithfully from the figshare ArticleComplete schema (Article + ProjectArticle + ArticleComplete).",
+  "type": "object",
+  "required": ["id", "title", "doi", "url_public_html", "url_public_api", "created_date", "defined_type_name"],
+  "properties": {
+    "id": { "type": "integer", "description": "Unique identifier for article", "examples": [1434614] },
+    "title": { "type": "string", "description": "Title of article" },
+    "doi": { "type": "string", "description": "DOI", "examples": ["10.6084/m9.figshare.1434614"] },
+    "handle": { "type": "string", "description": "Handle" },
+    "url": { "type": "string", "format": "uri", "description": "API endpoint for article" },
+    "url_public_html": { "type": "string", "format": "uri", "description": "Public site endpoint for article" },
+    "url_public_api": { "type": "string", "format": "uri", "description": "Public API endpoint for article" },
+    "url_private_html": { "type": "string", "format": "uri", "description": "Private site endpoint for article" },
+    "url_private_api": { "type": "string", "format": "uri", "description": "Private API endpoint for article" },
+    "thumb": { "type": "string", "format": "uri", "description": "Thumbnail image" },
+    "defined_type": { "type": "integer", "description": "Type of article identifier" },
+    "defined_type_name": { "type": "string", "description": "Name of the article type identifier", "examples": ["dataset", "media"] },
+    "created_date": { "type": "string", "description": "Date when article was created", "examples": ["2017-05-18T11:49:03Z"] },
+    "citation": { "type": "string", "description": "Article citation" },
+    "description": { "type": "string", "description": "Article description" },
+    "version": { "type": "integer", "description": "Article version" },
+    "status": { "type": "string", "description": "Article status", "examples": ["public"] },
+    "size": { "type": "integer", "description": "Article size in bytes" },
+    "is_public": { "type": "boolean", "description": "True if article is published" },
+    "is_embargoed": { "type": "boolean", "description": "True if article is embargoed" },
+    "is_confidential": { "type": "boolean", "description": "Article confidentiality" },
+    "is_metadata_record": { "type": "boolean", "description": "True if article has no files" },
+    "has_linked_file": { "type": "boolean", "description": "True if any files are linked to the article" },
+    "resource_doi": { "type": "string", "description": "Deprecated by related materials; in a publisher case, the publisher article DOI" },
+    "resource_title": { "type": "string", "description": "Deprecated by related materials; in a publisher case, the publisher article title" },
+    "tags": { "type": "array", "description": "List of article tags", "items": { "type": "string" } },
+    "keywords": { "type": "array", "description": "List of article keywords", "items": { "type": "string" } },
+    "references": { "type": "array", "description": "List of references", "items": { "type": "string", "format": "uri" } },
+    "funding": { "type": "string", "description": "Article funding" },
+    "license": {
+      "type": "object",
+      "description": "Article license",
+      "required": ["value", "name", "url"],
+      "properties": {
+        "value": { "type": "integer", "description": "License value" },
+        "name": { "type": "string", "description": "License name", "examples": ["CC BY"] },
+        "url": { "type": "string", "format": "uri", "description": "License url" }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Publication timeline",
+      "properties": {
+        "firstOnline": { "type": "string", "description": "Online posted date" },
+        "publisherPublication": { "type": "string", "description": "Publish date" },
+        "publisherAcceptance": { "type": "string", "description": "Date when the item was accepted for publication" }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of categories selected for the article",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "parent_id", "path", "source_id", "taxonomy_id"],
+        "properties": {
+          "id": { "type": "integer", "description": "Category id" },
+          "parent_id": { "type": "integer", "description": "Parent category" },
+          "title": { "type": "string", "description": "Category title" },
+          "path": { "type": "string", "description": "Path to all ancestor ids" },
+          "source_id": { "type": "string", "description": "ID in original standard taxonomy" },
+          "taxonomy_id": { "type": "integer", "description": "Internal id of taxonomy the category is part of" }
+        }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of article authors",
+      "items": {
+        "type": "object",
+        "required": ["id", "full_name", "is_active", "url_name"],
+        "properties": {
+          "id": { "type": "integer", "description": "Author id" },
+          "full_name": { "type": "string", "description": "Author full name" },
+          "first_name": { "type": "string", "description": "Author first name" },
+          "last_name": { "type": "string", "description": "Author last name" },
+          "is_active": { "type": "boolean", "description": "True if author has published items" },
+          "url_name": { "type": "string", "description": "Author url name" },
+          "orcid_id": { "type": "string", "description": "Author ORCID" }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "List of up to 10 article files",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "size", "is_link_only", "download_url"],
+        "properties": {
+          "id": { "type": "integer", "description": "File id" },
+          "name": { "type": "string", "description": "File name" },
+          "size": { "type": "integer", "description": "File size" },
+          "is_link_only": { "type": "boolean", "description": "True if file is hosted somewhere else" },
+          "download_url": { "type": "string", "format": "uri", "description": "Url for file download" },
+          "supplied_md5": { "type": "string", "description": "File supplied md5" },
+          "computed_md5": { "type": "string", "description": "File computed md5" },
+          "mimetype": { "type": "string", "description": "MIME type of the file" }
+        }
+      }
+    }
+  }
+}

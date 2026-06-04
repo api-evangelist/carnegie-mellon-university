@@ -1,0 +1,69 @@
+{
+  "id": 1434614,
+  "title": "Replication data for a Carnegie Mellon University research study",
+  "doi": "10.1184/r1.1434614",
+  "handle": "",
+  "url": "https://api.figshare.com/v2/articles/1434614",
+  "url_public_html": "https://kilthub.cmu.edu/articles/dataset/Replication_data/1434614",
+  "url_public_api": "https://api.figshare.com/v2/articles/1434614",
+  "thumb": "https://ndownloader.figshare.com/files/123456789/preview/12345678/thumb.png",
+  "defined_type": 3,
+  "defined_type_name": "dataset",
+  "created_date": "2017-05-18T11:49:03Z",
+  "citation": "Author, A. (2017): Replication data for a Carnegie Mellon University research study. Carnegie Mellon University. Dataset.",
+  "description": "Dataset and supporting files deposited in CMU's KiltHub institutional repository.",
+  "version": 1,
+  "status": "public",
+  "size": 69939,
+  "is_public": true,
+  "is_embargoed": false,
+  "is_confidential": false,
+  "is_metadata_record": false,
+  "has_linked_file": false,
+  "tags": ["research data", "open access"],
+  "keywords": ["research data", "open access"],
+  "references": ["https://kilthub.cmu.edu/"],
+  "funding": "none",
+  "license": {
+    "value": 1,
+    "name": "CC BY 4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "timeline": {
+    "firstOnline": "2017-05-18",
+    "publisherPublication": "2017-05-18"
+  },
+  "categories": [
+    {
+      "id": 11,
+      "parent_id": 1,
+      "title": "Information Systems",
+      "path": "/450/1024/6532",
+      "source_id": "300204",
+      "taxonomy_id": 4
+    }
+  ],
+  "authors": [
+    {
+      "id": 97657,
+      "full_name": "Jane Researcher",
+      "first_name": "Jane",
+      "last_name": "Researcher",
+      "is_active": true,
+      "url_name": "Jane_Researcher",
+      "orcid_id": "0000-0002-1825-0097"
+    }
+  ],
+  "files": [
+    {
+      "id": 3000002,
+      "name": "dataset.csv",
+      "size": 14848,
+      "is_link_only": false,
+      "download_url": "https://ndownloader.figshare.com/files/3000002",
+      "supplied_md5": "043a51806d646e88cafbf19e7b82846f",
+      "computed_md5": "043a51806d646e88cafbf19e7b82846f",
+      "mimetype": "text/csv"
+    }
+  ]
+}

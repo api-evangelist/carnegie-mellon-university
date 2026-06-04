@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.figshare.com/v2/articles/search",
+    "headers": { "Content-Type": "application/json" },
+    "body": {
+      "search_for": "machine learning",
+      "institution": 231,
+      "page": 1,
+      "page_size": 10,
+      "order": "published_date",
+      "order_direction": "desc"
+    }
+  },
+  "response": [
+    {
+      "id": 1434614,
+      "title": "Replication data for a Carnegie Mellon University research study",
+      "doi": "10.1184/r1.1434614",
+      "url_public_html": "https://kilthub.cmu.edu/articles/dataset/Replication_data/1434614",
+      "url_public_api": "https://api.figshare.com/v2/articles/1434614",
+      "defined_type_name": "dataset",
+      "published_date": "2017-05-18T11:49:03Z"
+    }
+  ]
+}

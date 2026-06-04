@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "cmu": "https://www.cmu.edu/ns/vocab#",
+    "@vocab": "https://www.cmu.edu/ns/vocab#",
+    "Organization": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+
+    "Article": "schema:Dataset",
+    "id": "schema:identifier",
+    "title": "schema:name",
+    "doi": { "@id": "schema:identifier", "@type": "@id" },
+    "handle": "schema:identifier",
+    "url_public_html": { "@id": "schema:url", "@type": "@id" },
+    "url_public_api": { "@id": "schema:url", "@type": "@id" },
+    "created_date": { "@id": "schema:dateCreated", "@type": "schema:DateTime" },
+    "citation": "schema:citation",
+    "version": "schema:version",
+    "size": "schema:contentSize",
+    "tags": "schema:keywords",
+    "keywords": "schema:keywords",
+    "references": "schema:citation",
+
+    "license": { "@id": "schema:license", "@type": "@id" },
+    "timeline": "schema:temporalCoverage",
+    "firstOnline": { "@id": "schema:datePublished", "@type": "schema:Date" },
+    "publisherPublication": { "@id": "schema:datePublished", "@type": "schema:Date" },
+
+    "categories": "schema:about",
+    "Category": "schema:DefinedTerm",
+
+    "authors": "schema:author",
+    "Author": "schema:Person",
+    "full_name": "schema:name",
+    "first_name": "schema:givenName",
+    "last_name": "schema:familyName",
+    "orcid_id": { "@id": "schema:identifier", "@type": "@id" },
+
+    "files": "schema:distribution",
+    "PublicFile": "schema:DataDownload",
+    "download_url": { "@id": "schema:contentUrl", "@type": "@id" },
+    "mimetype": "schema:encodingFormat"
+  },
+  "@type": "Organization",
+  "name": "Carnegie Mellon University",
+  "url": "https://www.cmu.edu/",
+  "description": "Private research university in Pittsburgh, Pennsylvania, USA. Its KiltHub institutional repository (hosted on figshare) exposes research outputs via the figshare v2 REST API."
+}

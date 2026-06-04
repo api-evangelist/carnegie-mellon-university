@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/main/json-structure/carnegie-mellon-university-article-structure.json",
+  "name": "KiltHubArticle",
+  "description": "JSON Structure for a public KiltHub (figshare v2) article / research output cataloged by Carnegie Mellon University.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Unique identifier for article" },
+    "title": { "type": "string", "description": "Title of article" },
+    "doi": { "type": "string", "description": "DOI" },
+    "handle": { "type": "string", "description": "Handle" },
+    "url_public_html": { "type": "uri", "description": "Public site endpoint for article" },
+    "url_public_api": { "type": "uri", "description": "Public API endpoint for article" },
+    "thumb": { "type": "uri", "description": "Thumbnail image" },
+    "defined_type_name": { "type": "string", "description": "Name of the article type identifier" },
+    "created_date": { "type": "string", "description": "Date when article was created (ISO 8601)" },
+    "citation": { "type": "string", "description": "Article citation" },
+    "description": { "type": "string", "description": "Article description" },
+    "version": { "type": "int32", "description": "Article version" },
+    "status": { "type": "string", "description": "Article status" },
+    "size": { "type": "int64", "description": "Article size in bytes" },
+    "is_public": { "type": "boolean", "description": "True if article is published" },
+    "is_embargoed": { "type": "boolean", "description": "True if article is embargoed" },
+    "is_metadata_record": { "type": "boolean", "description": "True if article has no files" },
+    "tags": { "type": "array", "items": { "type": "string" }, "description": "List of article tags" },
+    "keywords": { "type": "array", "items": { "type": "string" }, "description": "List of article keywords" },
+    "references": { "type": "array", "items": { "type": "uri" }, "description": "List of references" },
+    "license": {
+      "type": "object",
+      "description": "Article license",
+      "properties": {
+        "value": { "type": "int32", "description": "License value" },
+        "name": { "type": "string", "description": "License name" },
+        "url": { "type": "uri", "description": "License url" }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "description": "Publication timeline",
+      "properties": {
+        "firstOnline": { "type": "string", "description": "Online posted date" },
+        "publisherPublication": { "type": "string", "description": "Publish date" },
+        "publisherAcceptance": { "type": "string", "description": "Date accepted for publication" }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of categories selected for the article",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int32", "description": "Category id" },
+          "parent_id": { "type": "int32", "description": "Parent category" },
+          "title": { "type": "string", "description": "Category title" },
+          "path": { "type": "string", "description": "Path to all ancestor ids" },
+          "source_id": { "type": "string", "description": "ID in original standard taxonomy" },
+          "taxonomy_id": { "type": "int32", "description": "Internal id of taxonomy" }
+        }
+      }
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of article authors",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int64", "description": "Author id" },
+          "full_name": { "type": "string", "description": "Author full name" },
+          "first_name": { "type": "string", "description": "Author first name" },
+          "last_name": { "type": "string", "description": "Author last name" },
+          "is_active": { "type": "boolean", "description": "True if author has published items" },
+          "url_name": { "type": "string", "description": "Author url name" },
+          "orcid_id": { "type": "string", "description": "Author ORCID" }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "description": "List of up to 10 article files",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "int64", "description": "File id" },
+          "name": { "type": "string", "description": "File name" },
+          "size": { "type": "int64", "description": "File size" },
+          "is_link_only": { "type": "boolean", "description": "True if file is hosted elsewhere" },
+          "download_url": { "type": "uri", "description": "Url for file download" },
+          "supplied_md5": { "type": "string", "description": "File supplied md5" },
+          "computed_md5": { "type": "string", "description": "File computed md5" },
+          "mimetype": { "type": "string", "description": "MIME type of the file" }
+        }
+      }
+    }
+  },
+  "required": ["id", "title", "doi", "url_public_html", "url_public_api", "created_date", "defined_type_name"]
+}

@@ -65,6 +65,20 @@ apis:
         url: https://docs.figshare.com/#oai_pmh
       - type: Website
         url: https://kilthub.cmu.edu/
+      - type: OpenAPI
+        url: openapi/carnegie-mellon-university-kilthub-figshare.yaml
+      - type: JSONSchema
+        url: json-schema/carnegie-mellon-university-article-schema.json
+      - type: x-json-structure
+        url: json-structure/carnegie-mellon-university-article-structure.json
+      - type: x-rules
+        url: rules/carnegie-mellon-university-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/carnegie-mellon-university-vocabulary.yml
+      - type: x-json-ld
+        url: json-ld/carnegie-mellon-university-context.jsonld
+      - type: x-example
+        url: examples/carnegie-mellon-university-get-article-example.json
   - aid: carnegie-mellon-university:web-login-sso
     name: CMU Web Login (Shibboleth SSO)
     description: >-

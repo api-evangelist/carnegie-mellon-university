@@ -1,0 +1,53 @@
+vocabulary:
+  name: Carnegie Mellon University KiltHub Repository Vocabulary
+  description: >-
+    Controlled vocabulary for the core objects and fields exposed by the
+    figshare v2 REST API that backs Carnegie Mellon University's KiltHub
+    institutional repository. Terms are derived directly from the figshare
+    OpenAPI definition (articles, authors, categories, files, license, timeline).
+  version: "1.0.0"
+  terms:
+    - term: Article
+      definition: >-
+        A research output deposited in KiltHub (dataset, media, paper, poster,
+        software, etc.); the primary citable record exposed by the API.
+      tags: [object, research-output, core]
+    - term: doi
+      definition: Persistent Digital Object Identifier assigned to the article.
+      tags: [identifier, persistent]
+    - term: handle
+      definition: Handle System persistent identifier for the article.
+      tags: [identifier, persistent]
+    - term: defined_type_name
+      definition: Human-readable name of the article type (dataset, media, paper, software, etc.).
+      tags: [classification]
+    - term: citation
+      definition: Formatted citation string for the research output.
+      tags: [metadata, scholarly]
+    - term: timeline
+      definition: Publication timeline including firstOnline and publisher publication/acceptance dates.
+      tags: [object, dates]
+    - term: license
+      definition: License object (value, name, url) describing reuse terms, e.g. CC BY 4.0.
+      tags: [object, rights]
+    - term: Category
+      definition: Subject classification term from a figshare taxonomy applied to an article.
+      tags: [object, classification, taxonomy]
+    - term: Author
+      definition: A contributor to an article, including full_name and ORCID identifier.
+      tags: [object, person]
+    - term: orcid_id
+      definition: ORCID persistent researcher identifier for an author.
+      tags: [identifier, person]
+    - term: PublicFile
+      definition: A downloadable file attached to a public article, with md5 checksums and download_url.
+      tags: [object, file]
+    - term: is_embargoed
+      definition: Boolean indicating whether the article's files are currently under embargo.
+      tags: [status, boolean]
+    - term: is_metadata_record
+      definition: Boolean indicating the article is a metadata-only record with no deposited files.
+      tags: [status, boolean]
+    - term: institution
+      definition: figshare institution/portal identifier used to scope searches to CMU (portal_231).
+      tags: [scope, institution]
