@@ -94,6 +94,10 @@ apis:
       - type: Documentation
         url: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
 common:
+  - type: DomainSecurity
+    url: security/carnegie-mellon-university-domain-security.yml
+  - type: Authentication
+    url: authentication/carnegie-mellon-university-authentication.yml
   - type: OAuthScopes
     url: scopes/carnegie-mellon-university-scopes.yml
   - type: Website
