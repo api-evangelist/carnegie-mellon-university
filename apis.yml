@@ -13,9 +13,22 @@ description: >-
   the figshare REST API, and CMU runs a campus-wide Shibboleth/Web Login
   single sign-on identity service.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/carnegie-mellon-university.png
 url: https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/refs/heads/main/apis.yml
 tags:
   - Education
@@ -31,68 +44,306 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: carnegie-mellon-university:delphi-epidata
-    name: Delphi Epidata API
-    description: >-
-      Public, anonymously accessible HTTP/JSON API maintained by the Carnegie
-      Mellon University Delphi research group providing real-time and
-      historical epidemiological surveillance data, including the COVIDcast
-      endpoint and a range of disease signals (influenza, dengue, norovirus
-      and more). R and Python clients are available. Verified returning live
-      JSON at the base URL.
-    humanURL: https://cmu-delphi.github.io/delphi-epidata/
-    baseURL: https://api.delphi.cmu.edu/epidata/
-    tags: [ Epidemiology, Health Data, Research, Open Data, Public Health ]
-    properties:
-      - type: Documentation
-        url: https://cmu-delphi.github.io/delphi-epidata/
-      - type: GitHub
-        url: https://github.com/cmu-delphi/delphi-epidata
-  - aid: carnegie-mellon-university:kilthub-oai-pmh
-    name: KiltHub Repository OAI-PMH (figshare)
-    description: >-
-      OAI-PMH metadata harvesting endpoint for CMU's KiltHub institutional
-      repository, the University Libraries' platform for research data and
-      scholarly outputs, hosted on figshare. The CMU-scoped set (portal_231)
-      returns institution records and the endpoint is verified returning valid
-      OAI-PMH XML. The underlying figshare v2 REST API is also publicly
-      reachable.
-    humanURL: https://guides.library.cmu.edu/kilthub
-    baseURL: https://api.figshare.com/v2/oai
-    tags: [ Institutional Repository, Research Data, OAI-PMH, Library, Open Data ]
-    properties:
-      - type: Documentation
-        url: https://docs.figshare.com/#oai_pmh
-      - type: Website
-        url: https://kilthub.cmu.edu/
-      - type: OpenAPI
-        url: openapi/carnegie-mellon-university-kilthub-figshare.yaml
-      - type: JSONSchema
-        url: json-schema/carnegie-mellon-university-article-schema.json
-      - type: x-json-structure
-        url: json-structure/carnegie-mellon-university-article-structure.json
-      - type: x-rules
-        url: rules/carnegie-mellon-university-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/carnegie-mellon-university-vocabulary.yml
-      - type: x-json-ld
-        url: json-ld/carnegie-mellon-university-context.jsonld
-      - type: x-example
-        url: examples/carnegie-mellon-university-get-article-example.json
-  - aid: carnegie-mellon-university:web-login-sso
-    name: CMU Web Login (Shibboleth SSO)
-    description: >-
-      Carnegie Mellon's campus-wide single sign-on identity service based on
-      Shibboleth/SAML, used by service providers to authenticate authorized
-      users. The identity provider metadata endpoint is publicly reachable.
-      This is an authentication service for affiliated service providers rather
-      than an open public data API.
-    humanURL: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
-    baseURL: https://login.cmu.edu/idp/shibboleth
-    tags: [ Identity, Authentication, SSO, Shibboleth, SAML ]
-    properties:
-      - type: Documentation
-        url: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+- aid: carnegie-mellon-university:delphi-epidata
+  name: Delphi Epidata API
+  description: >-
+    Public, anonymously accessible HTTP/JSON API maintained by the Carnegie Mellon University Delphi research
+    group providing real-time and historical epidemiological surveillance data, including the COVIDcast
+    endpoint and a range of disease signals (influenza, dengue, norovirus and more). R and Python clients
+    are available. Verified returning live JSON at the base URL.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - Epidemiology
+  - Health Data
+  - Research
+  - Open Data
+  - Public Health
+  properties:
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: GitHub
+    url: https://github.com/cmu-delphi/delphi-epidata
+- aid: carnegie-mellon-university:web-login-sso
+  name: CMU Web Login (Shibboleth SSO)
+  description: >-
+    Carnegie Mellon's campus-wide single sign-on identity service based on Shibboleth/SAML, used by service
+    providers to authenticate authorized users. The identity provider metadata endpoint is publicly reachable.
+    This is an authentication service for affiliated service providers rather than an open public data
+    API.
+  humanURL: >-
+    https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+  baseURL: https://login.cmu.edu/idp/shibboleth
+  tags:
+  - Identity
+  - Authentication
+  - SSO
+  - Shibboleth
+  - SAML
+  properties:
+  - type: Documentation
+    url: >-
+      https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+- aid: carnegie-mellon-university:carnegie-mellon-university-altmetric-api
+  name: Carnegie Mellon University altmetric API
+  description: The altmetric API from Carnegie Mellon University — 1 operation(s) for altmetric.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - altmetric
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-altmetric-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-articles-api
+  name: Carnegie Mellon University articles API
+  description: The articles API from Carnegie Mellon University — 34 operation(s) for articles.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - articles
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-articles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-authors-api
+  name: Carnegie Mellon University authors API
+  description: The authors API from Carnegie Mellon University — 2 operation(s) for authors.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - authors
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-authors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-collections-api
+  name: Carnegie Mellon University collections API
+  description: The collections API from Carnegie Mellon University — 21 operation(s) for collections.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - collections
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-collections-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-institutions-api
+  name: Carnegie Mellon University institutions API
+  description: The institutions API from Carnegie Mellon University — 20 operation(s) for institutions.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - institutions
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-institutions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-oauth-api
+  name: Carnegie Mellon University oauth API
+  description: The oauth API from Carnegie Mellon University — 1 operation(s) for oauth.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - oauth
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-other-api
+  name: Carnegie Mellon University other API
+  description: The other API from Carnegie Mellon University — 7 operation(s) for other.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - other
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-other-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-profiles-api
+  name: Carnegie Mellon University profiles API
+  description: The profiles API from Carnegie Mellon University — 2 operation(s) for profiles.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-projects-api
+  name: Carnegie Mellon University projects API
+  description: The projects API from Carnegie Mellon University — 17 operation(s) for projects.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
+- aid: carnegie-mellon-university:carnegie-mellon-university-symplectic-api
+  name: Carnegie Mellon University symplectic API
+  description: The symplectic API from Carnegie Mellon University — 5 operation(s) for symplectic.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata/
+  tags:
+  - symplectic
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-symplectic-api-openapi.yml
+  - type: Documentation
+    url: https://docs.figshare.com/#oai_pmh
+  - type: Website
+    url: https://kilthub.cmu.edu/
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-article-schema.json
+  - type: x-json-structure
+    url: json-structure/carnegie-mellon-university-article-structure.json
+  - type: x-rules
+    url: rules/carnegie-mellon-university-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/carnegie-mellon-university-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/carnegie-mellon-university-context.jsonld
+  - type: x-example
+    url: examples/carnegie-mellon-university-get-article-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/carnegie-mellon-university-agentic-access.yml
