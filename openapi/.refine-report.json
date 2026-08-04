@@ -1,0 +1,32 @@
+{
+  "provider": "carnegie-mellon-university",
+  "sources": [
+    "carnegie-mellon-university-altmetric-api-openapi.yml",
+    "carnegie-mellon-university-articles-api-openapi.yml",
+    "carnegie-mellon-university-authors-api-openapi.yml",
+    "carnegie-mellon-university-collections-api-openapi.yml",
+    "carnegie-mellon-university-institutions-api-openapi.yml",
+    "carnegie-mellon-university-oauth-api-openapi.yml",
+    "carnegie-mellon-university-other-api-openapi.yml",
+    "carnegie-mellon-university-profiles-api-openapi.yml",
+    "carnegie-mellon-university-projects-api-openapi.yml",
+    "carnegie-mellon-university-symplectic-api-openapi.yml"
+  ],
+  "outputs": [
+    "carnegie-mellon-university-altmetric-api-openapi.yml",
+    "carnegie-mellon-university-articles-api-openapi.yml",
+    "carnegie-mellon-university-authors-api-openapi.yml",
+    "carnegie-mellon-university-collections-api-openapi.yml",
+    "carnegie-mellon-university-institutions-api-openapi.yml",
+    "carnegie-mellon-university-oauth-api-openapi.yml",
+    "carnegie-mellon-university-other-api-openapi.yml",
+    "carnegie-mellon-university-profiles-api-openapi.yml",
+    "carnegie-mellon-university-projects-api-openapi.yml",
+    "carnegie-mellon-university-symplectic-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
