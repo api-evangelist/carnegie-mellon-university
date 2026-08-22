@@ -33,6 +33,28 @@
 > **Response times.** Acknowledgement within **one business day**; removal or restriction within
 > **two business days**; corrections and re-scores within **five business days**.
 >
+> **Not from the company, and here with a question?** You are welcome here — we would rather be the
+> front line and point you the right way than have a good report go nowhere. What this repository
+> can answer is narrow, though, so it is worth knowing who you are actually looking for:
+>
+> - **A question about how the API works, an account, billing, or a bug in the service** — that is
+>   the company's own support, not us. We profile this API; we do not operate it and cannot see
+>   your account.
+> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
+>   This has happened with a real and correct bug report that reached us instead of the people who
+>   could fix it, which helped nobody.
+> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
+>   wrong artifact — is ours. Open an issue here.
+> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
+>   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
+>
+> **This repository contains no software, and we will never ask you to download anything.** There is
+> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
+> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
+> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
+> link; it is a lure. Report it to GitHub and, if you like, tell us at
+> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
+>
 > **On a security or compliance team?** Email
 > [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
 > you will get a person, not a form. We will tell you exactly which public URLs this profile was
@@ -49,17 +71,38 @@ Carnegie Mellon University is a private research university in Pittsburgh, Penns
 
 ## Type
 
-- Index / Consumer / 3rd-Party
+- Index / Producer / Public — `x-type: university`, `x-category: Private Research University`
 
 ## Tags
 
-Education, Higher Education, University, United States, Research, Epidemiology, Open Data, Library, Institutional Repository
+University, Higher Education, Education, United States, Private Research University, Research, Epidemiology, Public Health, Cybersecurity, Vulnerability Disclosure, Scholarly Publishing, Institutional Repository, Identity Federation, Open Access, Open Data
 
 ## APIs
 
-- **Delphi Epidata API** — Real-time and historical epidemiological surveillance data (COVIDcast, fluview, and more), maintained by CMU's Delphi research group. Verified returning live JSON. Docs: https://cmu-delphi.github.io/delphi-epidata/ — GitHub: https://github.com/cmu-delphi/delphi-epidata
-- **KiltHub Repository OAI-PMH (figshare)** — OAI-PMH metadata harvesting for CMU's institutional repository of research data and scholarly outputs, hosted on figshare (CMU set `portal_231`). Docs: https://docs.figshare.com/#oai_pmh — Repository: https://kilthub.cmu.edu/
-- **CMU Web Login (Shibboleth SSO)** — Campus-wide Shibboleth/SAML single sign-on identity service for affiliated service providers. Docs: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+Every surface carries an `x-operator`: **institution** (CMU's own host and engineering), **tenant**
+(CMU's data on a vendor's platform) or **vendor** (not recorded here at all). Re-profiled 2026-08-19
+under the university pipeline.
+
+### Institution-operated
+
+- **Delphi Epidata API** (`institution`) — Real-time and historical epidemiological surveillance data (COVIDcast, FluView, Delphi's own forecasts), operated by CMU's Delphi research group. Five endpoints verified live 2026-08-19; `/epidata/version` returned 4.1.44. Errors arrive with HTTP 200 and are signalled only in the body's `result` field. Base: https://api.delphi.cmu.edu/epidata — Docs: https://cmu-delphi.github.io/delphi-epidata/
+- **CERT/CC Vulnerability Notes API** (`institution`) — The machine-readable record of coordinated vulnerability disclosure, operated by the CERT Division of the Software Engineering Institute, an FFRDC operated by Carnegie Mellon. Returns Vulnerability Notes, the CVEs each case covers, and per-vendor coordination statements. Lives on cert.org rather than cmu.edu, which is why the cohort audit could not see it. Base: https://kb.cert.org/vuls/api — Docs: https://certcc.github.io/
+- **CMU Library Publishing Service API + OAI-PMH** (`institution`) — REST API and conformant OAI-PMH 2.0 provider for the five open-access journals University Libraries publishes. Self-hosted at 128.2.24.32, inside CMU's own /16 — the institution's own machine, not a vendor tenancy. Base: https://lps.library.cmu.edu/api — Site: https://lps.library.cmu.edu/
+- **CMU Web Login (Shibboleth SAML 2.0 IdP)** (`institution`) — Campus-wide SAML identity provider on CMU's own host, publishing readable metadata and registered with InCommon/eduGAIN under the Research & Scholarship entity category. https://login.cmu.edu/idp/shibboleth
+
+### Tenant relationships
+
+- **KiltHub Institutional Repository** (`tenant`, figshare) — CMU's research data repository. The data and DOIs are CMU's; the platform, API and OAI-PMH endpoint are figshare's. `kilthub.cmu.edu` is a CNAME to `FIGSHARE.COM`; records are harvestable only from `api.figshare.com/v2/oai` using `set=portal_231`. https://kilthub.cmu.edu/
+- **Canvas LTI 1.3 Advantage** (`tenant`, Instructure) — An LTI Advantage JWKS is served on a CMU hostname, but `canvas.cmu.edu` is a CNAME to `CMU-VANITY.INSTRUCTURE.COM`. The courses are CMU's; the LTI engineering is not.
+- **CMU Eats API** (`tenant`, ScottyLabs) — Dining locations, hours and menus, built and run by a CMU student organization at `api.cmueats.com`. It exists because CMU's own dining application is a Blazor catch-all that returns an SPA shell with HTTP 200 for every path, including nonsense. Endorsement by CMU: unverified.
+
+### Removed 2026-08-19
+
+Ten figshare-derived OpenAPIs (`altmetric`, `articles`, `authors`, `collections`, `institutions`,
+`oauth`, `other`, `profiles`, `projects`, `symplectic`) and twenty derived Postman/OpenCollection
+files whose every request URL was `api.figshare.com`. They were one vendor contract, split by tag,
+credited to Carnegie Mellon eleven times over — the same document that gave the eight top-scoring
+universities in this catalog an identical agent-readiness score of 38.9.
 
 ## Plans
 
@@ -76,7 +119,7 @@ Education, Higher Education, University, United States, Research, Epidemiology, 
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-19
 
 ## Common Properties
 
