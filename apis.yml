@@ -55,104 +55,18 @@ specificationVersion: '0.23'
 x-type: university
 x-category: Private Research University
 apis:
-- aid: carnegie-mellon-university:delphi-epidata
-  name: Delphi Epidata API
-  description: >-
-    Public, anonymously accessible HTTP/JSON API operated by the Delphi research group at Carnegie
-    Mellon University, serving real-time and historical epidemiological surveillance data —
-    COVIDcast indicator signals, CDC FluView influenza-like-illness records, and Delphi's own
-    nowcasts and forecasts. Revision-aware: every record carries the issue and lag that describe
-    when it was reported versus when it was observed. Verified live on five endpoints 2026-08-19;
-    /epidata/version returned 4.1.44. Errors are returned with HTTP 200 and signalled only in the
-    body's `result` field.
-  humanURL: https://cmu-delphi.github.io/delphi-epidata/
-  baseURL: https://api.delphi.cmu.edu/epidata
-  tags:
-  - Epidemiology
-  - Public Health
-  - Health Data
-  - Research
-  - Open Data
-  x-operator: institution
-  properties:
-  - type: OpenAPI
-    url: openapi/carnegie-mellon-university-delphi-epidata-openapi.yml
-  - type: Documentation
-    url: https://cmu-delphi.github.io/delphi-epidata/
-  - type: APIReference
-    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
-  - type: SourceCode
-    url: https://github.com/cmu-delphi/delphi-epidata
-  - type: JSONSchema
-    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
-- aid: carnegie-mellon-university:cert-vulnerability-notes
-  name: CERT/CC Vulnerability Notes API
-  description: >-
-    Public read API for the CERT Coordination Center's Vulnerability Notes database, operated by
-    the CERT Division of the Software Engineering Institute — a federally funded research and
-    development center operated by Carnegie Mellon University. Returns the full Note record, the
-    CVEs a coordination case covers, and the per-vendor status statements CERT/CC collected during
-    disclosure. The vendor-statement collection is the machine-readable trace of the coordination
-    process itself and has no equivalent anywhere else. kb.cert.org is not a cmu.edu host, which
-    is why the cohort audit could not see it: cert.org 301s to sei.cmu.edu, and the sibling Atom
-    feed declares its author uri as https://www.sei.cmu.edu.
-  humanURL: https://www.kb.cert.org/vuls/
-  baseURL: https://kb.cert.org/vuls/api
-  tags:
-  - Cybersecurity
-  - Vulnerability Disclosure
-  - CVE
-  - Research
-  - Open Data
-  x-operator: institution
-  properties:
-  - type: OpenAPI
-    url: openapi/carnegie-mellon-university-cert-vulnerability-notes-openapi.yml
-  - type: Documentation
-    url: https://certcc.github.io/
-  - type: APIReference
-    url: https://www.kb.cert.org/vuls/
-  - type: SourceCode
-    url: https://github.com/CERTCC
-  - type: JSONSchema
-    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
-- aid: carnegie-mellon-university:library-publishing
-  name: CMU Library Publishing Service API + OAI-PMH
-  description: >-
-    REST API and conformant OAI-PMH 2.0 provider for the Carnegie Mellon University Library
-    Publishing Service, the open-access publishing programme run by University Libraries. Exposes
-    five journals (Language Development Research, Encyclopedia of the History of Science, MAJAL,
-    Negotiation and Conflict Management Research, Tolstoy Studies Journal), their issues, 379
-    articles, keywords and preprint objects. Self-hosted at 128.2.24.32 — inside Carnegie Mellon's
-    own /16 — so unlike almost every research surface in this cohort it is the institution's own
-    machine, not a vendor tenancy. The OAI-PMH Identify response names the repository as Carnegie
-    Mellon University Library Publishing Service and the administrator as
-    librarypublishing@andrew.cmu.edu, and advertises oai_dc and jats.
-  humanURL: https://lps.library.cmu.edu/
-  baseURL: https://lps.library.cmu.edu/api
-  tags:
-  - Scholarly Publishing
-  - Open Access
-  - Library
-  - OAI-PMH
-  - Research
-  x-operator: institution
-  properties:
-  - type: OpenAPI
-    url: openapi/carnegie-mellon-university-library-publishing-openapi.yml
-  - type: Documentation
-    url: https://lps.library.cmu.edu/
 - aid: carnegie-mellon-university:web-login-sso
   name: CMU Web Login (Shibboleth SAML 2.0 Identity Provider)
   description: >-
-    Carnegie Mellon's campus-wide single sign-on identity provider, running Shibboleth on CMU's own
-    host and address space (login.cmu.edu, 128.2.42.22). Its SAML 2.0 metadata is publicly readable
-    at the canonical /idp/shibboleth location, and it is a registered InCommon — and thereby
-    eduGAIN — entity carrying the Research & Scholarship entity category, which is a
-    machine-readable commitment to release a defined attribute bundle to R&S service providers.
-    An authentication service for relying service providers, not a data API, and the single most
-    unambiguously institution-operated machine-readable surface CMU publishes.
-  humanURL: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+    Carnegie Mellon's campus-wide single sign-on identity provider, running Shibboleth on CMU's own host
+    and address space (login.cmu.edu, 128.2.42.22). Its SAML 2.0 metadata is publicly readable at the
+    canonical /idp/shibboleth location, and it is a registered InCommon — and thereby eduGAIN — entity
+    carrying the Research & Scholarship entity category, which is a machine-readable commitment to release
+    a defined attribute bundle to R&S service providers. An authentication service for relying service
+    providers, not a data API, and the single most unambiguously institution-operated machine-readable
+    surface CMU publishes.
+  humanURL: >-
+    https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
   baseURL: https://login.cmu.edu/idp/shibboleth
   tags:
   - Identity Federation
@@ -164,22 +78,22 @@ apis:
   x-operator: institution
   properties:
   - type: Documentation
-    url: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+    url: >-
+      https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
   - type: Metadata
     url: https://mdq.incommon.org/entities/https%3A%2F%2Flogin.cmu.edu%2Fidp%2Fshibboleth
 - aid: carnegie-mellon-university:kilthub-figshare-tenant
   name: KiltHub Institutional Repository (figshare) — tenant
   description: >-
-    KiltHub is Carnegie Mellon's institutional repository for research data and scholarly output.
-    The data, the collections and the DOIs are CMU's; the platform, the API and the OAI-PMH
-    endpoint are figshare's. kilthub.cmu.edu is a CNAME to FIGSHARE.COM and answers HTTP 202 with
-    an empty body to non-browser clients; its records are harvestable only from figshare's own
-    shared host at https://api.figshare.com/v2/oai using set=portal_231, whose Identify response
-    names the repository as "figshare". Recorded as a tenant relationship, which is what it is.
-    The eleven figshare-derived contracts this repo carried until 2026-08-19 —
-    altmetric/articles/authors/collections/institutions/oauth/other/profiles/projects/symplectic —
-    were the same vendor document split by tag and credited to CMU eleven times over. They have
-    been removed; the relationship has not.
+    KiltHub is Carnegie Mellon's institutional repository for research data and scholarly output. The
+    data, the collections and the DOIs are CMU's; the platform, the API and the OAI-PMH endpoint are figshare's.
+    kilthub.cmu.edu is a CNAME to FIGSHARE.COM and answers HTTP 202 with an empty body to non-browser
+    clients; its records are harvestable only from figshare's own shared host at https://api.figshare.com/v2/oai
+    using set=portal_231, whose Identify response names the repository as "figshare". Recorded as a tenant
+    relationship, which is what it is. The eleven figshare-derived contracts this repo carried until 2026-08-19
+    — altmetric/articles/authors/collections/institutions/oauth/other/profiles/projects/symplectic — were
+    the same vendor document split by tag and credited to CMU eleven times over. They have been removed;
+    the relationship has not.
   humanURL: https://kilthub.cmu.edu/
   baseURL: https://api.figshare.com/v2
   tags:
@@ -190,22 +104,20 @@ apis:
   x-operator: tenant
   x-vendor: figshare
   x-vendor-evidence: >-
-    kilthub.cmu.edu CNAME FIGSHARE.COM (dig, 2026-08-19). OAI-PMH Identify at
-    https://api.figshare.com/v2/oai returns repositoryName "figshare"; CMU's content is addressed
-    as set=portal_231.
+    kilthub.cmu.edu CNAME FIGSHARE.COM (dig, 2026-08-19). OAI-PMH Identify at https://api.figshare.com/v2/oai
+    returns repositoryName "figshare"; CMU's content is addressed as set=portal_231.
   properties:
   - type: Documentation
     url: https://kilthub.cmu.edu/
 - aid: carnegie-mellon-university:canvas-lti-tenant
   name: Canvas LTI 1.3 Advantage (Instructure) — tenant
   description: >-
-    CMU's learning management system serves an LTI 1.3 / LTI Advantage JWKS at
-    canvas.cmu.edu/api/lti/security/jwks, so the LTI standard is genuinely in play in CMU's
-    teaching environment. It is recorded as a tenancy rather than a CMU surface because
-    canvas.cmu.edu is a CNAME to CMU-VANITY.INSTRUCTURE.COM — the LTI implementation, key rotation
-    and contract are Instructure's, running under a CMU vanity hostname. The courses and tool
-    deployments behind it are CMU's; the engineering is not. Included because the tenancy is a
-    real institutional fact and because it is the only `lti` conformance point on a CMU name.
+    CMU's learning management system serves an LTI 1.3 / LTI Advantage JWKS at canvas.cmu.edu/api/lti/security/jwks,
+    so the LTI standard is genuinely in play in CMU's teaching environment. It is recorded as a tenancy
+    rather than a CMU surface because canvas.cmu.edu is a CNAME to CMU-VANITY.INSTRUCTURE.COM — the LTI
+    implementation, key rotation and contract are Instructure's, running under a CMU vanity hostname.
+    The courses and tool deployments behind it are CMU's; the engineering is not. Included because the
+    tenancy is a real institutional fact and because it is the only `lti` conformance point on a CMU name.
   humanURL: https://canvas.cmu.edu/
   baseURL: https://canvas.cmu.edu/api/lti
   tags:
@@ -221,14 +133,14 @@ apis:
 - aid: carnegie-mellon-university:cmu-eats-scottylabs
   name: CMU Eats API (ScottyLabs) — student-operated
   description: >-
-    A public JSON API for Carnegie Mellon dining locations, hours and menus, built and run by
-    ScottyLabs, a CMU student organization, at api.cmueats.com. It exists because CMU's own dining
-    surface does not: apps.studentaffairs.cmu.edu/dining/conceptinfo is a Blazor Server app whose
-    catch-all route returns the SPA shell with HTTP 200 for every path, including deliberate
-    nonsense, so there is no institutional JSON endpoint to call. Recorded as `tenant` rather than
-    `institution` because the domain is not CMU's and no cmu.edu endorsement of the service was
-    found; the data it serves is CMU's, the software is not. The older ScottyLabs host
-    dining.apis.scottylabs.org still answers but its payload now instructs callers to migrate.
+    A public JSON API for Carnegie Mellon dining locations, hours and menus, built and run by ScottyLabs,
+    a CMU student organization, at api.cmueats.com. It exists because CMU's own dining surface does not:
+    apps.studentaffairs.cmu.edu/dining/conceptinfo is a Blazor Server app whose catch-all route returns
+    the SPA shell with HTTP 200 for every path, including deliberate nonsense, so there is no institutional
+    JSON endpoint to call. Recorded as `tenant` rather than `institution` because the domain is not CMU's
+    and no cmu.edu endorsement of the service was found; the data it serves is CMU's, the software is
+    not. The older ScottyLabs host dining.apis.scottylabs.org still answers but its payload now instructs
+    callers to migrate.
   humanURL: https://cmueats.com/
   baseURL: https://api.cmueats.com/v2
   tags:
@@ -241,6 +153,342 @@ apis:
   properties:
   - type: SourceCode
     url: https://github.com/ScottyLabs
+- aid: carnegie-mellon-university:carnegie-mellon-university-articles-api
+  name: Carnegie Mellon University Articles API
+  description: Published articles.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - articles
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-articles-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-covidcast-api
+  name: Carnegie Mellon University Covidcast API
+  description: COVIDcast real-time indicator signals across geographies.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - covidcast
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-covidcast-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-feeds-api
+  name: Carnegie Mellon University Feeds API
+  description: Syndication.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - feeds
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-feeds-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-fluview-api
+  name: Carnegie Mellon University Fluview API
+  description: US ILINet influenza-like-illness surveillance (CDC FluView).
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - fluview
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-fluview-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-forecasts-api
+  name: Carnegie Mellon University Forecasts API
+  description: Delphi's own nowcasts and forecasts.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - forecasts
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-forecasts-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-issues-api
+  name: Carnegie Mellon University Issues API
+  description: Issues within a journal.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - issues
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-issues-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-journals-api
+  name: Carnegie Mellon University Journals API
+  description: The journals CMU Libraries publishes.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - journals
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-journals-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-meta-api
+  name: Carnegie Mellon University Meta API
+  description: Service metadata and version.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - meta
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-meta-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-notes-api
+  name: Carnegie Mellon University Notes API
+  description: Vulnerability Notes.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - notes
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-notes-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-oai-pmh-api
+  name: Carnegie Mellon University Oai Pmh API
+  description: OAI-PMH 2.0 metadata harvesting provider.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - oai-pmh
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-oai-pmh-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-preprints-api
+  name: Carnegie Mellon University Preprints API
+  description: Preprint repository objects.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - preprints
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-preprints-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
+- aid: carnegie-mellon-university:carnegie-mellon-university-vendors-api
+  name: Carnegie Mellon University Vendors API
+  description: Per-vendor coordination status.
+  humanURL: https://cmu-delphi.github.io/delphi-epidata/
+  baseURL: https://api.delphi.cmu.edu/epidata
+  tags:
+  - vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/carnegie-mellon-university-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://cmu-delphi.github.io/delphi-epidata/
+  - type: APIReference
+    url: https://cmu-delphi.github.io/delphi-epidata/api/README.html
+  - type: SourceCode
+    url: https://github.com/cmu-delphi/delphi-epidata
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-delphi-epidata-envelope.json
+  - type: Documentation
+    url: https://certcc.github.io/
+  - type: APIReference
+    url: https://www.kb.cert.org/vuls/
+  - type: SourceCode
+    url: https://github.com/CERTCC
+  - type: JSONSchema
+    url: json-schema/carnegie-mellon-university-cert-vulnerability-note.json
+  - type: Documentation
+    url: https://lps.library.cmu.edu/
 common:
 - type: Website
   url: https://www.cmu.edu/
