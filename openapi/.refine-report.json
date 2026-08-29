@@ -1,32 +1,36 @@
 {
   "provider": "carnegie-mellon-university",
   "sources": [
-    "carnegie-mellon-university-altmetric-api-openapi.yml",
-    "carnegie-mellon-university-articles-api-openapi.yml",
-    "carnegie-mellon-university-authors-api-openapi.yml",
-    "carnegie-mellon-university-collections-api-openapi.yml",
-    "carnegie-mellon-university-institutions-api-openapi.yml",
-    "carnegie-mellon-university-oauth-api-openapi.yml",
-    "carnegie-mellon-university-other-api-openapi.yml",
-    "carnegie-mellon-university-profiles-api-openapi.yml",
-    "carnegie-mellon-university-projects-api-openapi.yml",
-    "carnegie-mellon-university-symplectic-api-openapi.yml"
+    "carnegie-mellon-university-cert-vulnerability-notes-openapi.yml",
+    "carnegie-mellon-university-delphi-epidata-openapi.yml",
+    "carnegie-mellon-university-library-publishing-openapi.yml"
   ],
   "outputs": [
-    "carnegie-mellon-university-altmetric-api-openapi.yml",
+    "carnegie-mellon-university-feeds-api-openapi.yml",
+    "carnegie-mellon-university-notes-api-openapi.yml",
+    "carnegie-mellon-university-vendors-api-openapi.yml",
+    "carnegie-mellon-university-covidcast-api-openapi.yml",
+    "carnegie-mellon-university-fluview-api-openapi.yml",
+    "carnegie-mellon-university-forecasts-api-openapi.yml",
+    "carnegie-mellon-university-meta-api-openapi.yml",
     "carnegie-mellon-university-articles-api-openapi.yml",
-    "carnegie-mellon-university-authors-api-openapi.yml",
-    "carnegie-mellon-university-collections-api-openapi.yml",
-    "carnegie-mellon-university-institutions-api-openapi.yml",
-    "carnegie-mellon-university-oauth-api-openapi.yml",
-    "carnegie-mellon-university-other-api-openapi.yml",
-    "carnegie-mellon-university-profiles-api-openapi.yml",
-    "carnegie-mellon-university-projects-api-openapi.yml",
-    "carnegie-mellon-university-symplectic-api-openapi.yml"
+    "carnegie-mellon-university-issues-api-openapi.yml",
+    "carnegie-mellon-university-journals-api-openapi.yml",
+    "carnegie-mellon-university-oai-pmh-api-openapi.yml",
+    "carnegie-mellon-university-preprints-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "archived openapi/carnegie-mellon-university-cert-vulnerability-notes-openapi.yml",
+    "archived openapi/carnegie-mellon-university-delphi-epidata-openapi.yml",
+    "archived openapi/carnegie-mellon-university-library-publishing-openapi.yml"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "carnegie-mellon-university-cert-vulnerability-notes-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "carnegie-mellon-university-delphi-epidata-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "carnegie-mellon-university-library-publishing-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+12 apis, 16 total)"
+  ],
   "skipped": []
 }

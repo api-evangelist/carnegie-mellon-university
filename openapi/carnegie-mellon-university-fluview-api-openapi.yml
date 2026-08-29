@@ -1,0 +1,120 @@
+openapi: 3.2.0
+info:
+  title: Delphi Epidata Fluview API
+  version: 4.1.44
+  description: 'Public, anonymously accessible HTTP/JSON API operated by the Delphi research group at Carnegie Mellon University, serving real-time and historical epidemiological surveillance data. Delphi is a CMU research group (Machine Learning Department / Herbert A. Simon building, delphi.cmu.edu) and a former CDC Center of Excellence for Influenza Forecasting. The API is a single-host, query-parameter-driven surface: every endpoint is a GET under /epidata/, every response is a JSON envelope of {epidata, result, message}, and `result` carries Delphi''s own status convention (1 = success, -2 = no results, -1 = bad request) rather than relying on the HTTP status code alone. CMU publishes no OpenAPI, GraphQL schema or machine-readable contract for this API; this document was derived from live probes and from the prose documentation at cmu-delphi.github.io/delphi-epidata.'
+  termsOfService: https://cmu-delphi.github.io/delphi-epidata/
+  contact:
+    name: Carnegie Mellon University — Delphi Research Group
+    url: https://delphi.cmu.edu/
+  license:
+    name: See Delphi Epidata data-source licensing
+    url: https://cmu-delphi.github.io/delphi-epidata/api/covidcast_licensing.html
+  x-operator: institution
+  x-operator-evidence: 'servers[] api.delphi.cmu.edu is a host under Carnegie Mellon University''s own registrable domain, cmu.edu. The API''s landing page at https://api.delphi.cmu.edu/epidata/ titles itself "DELPHI Epidata API" and links to github.com/cmu-delphi/delphi-epidata; the cmu-delphi GitHub organization is named "Delphi" with blog https://delphi.cmu.edu/. No vendor host, vendor contact or vendor terms appear anywhere on the surface. Probed 2026-08-19: /epidata/version 200 application/json {"version":"4.1.44"}; /epidata/covidcast_meta/ 200; /epidata/fluview/?regions=nat&epiweeks=202001 200; /epidata/covidcast/ with a full parameter set 200; /epidata/delphi/?system=ec&epiweek=201501 200.'
+  x-provenance:
+    generated: '2026-08-19'
+    method: derived
+    source: Live probes of https://api.delphi.cmu.edu/epidata/ on 2026-08-19 (five endpoints, real payloads captured into examples/), reconciled against the prose documentation at https://cmu-delphi.github.io/delphi-epidata/ and https://cmu-delphi.github.io/delphi-epidata/api/covidcast.html.
+    authorship: Written by API Evangelist, not published by Carnegie Mellon University. CMU ships no machine-readable contract for this API — /epidata/openapi.json, /epidata/openapi.yaml, /epidata/openapi and /epidata/swagger.json all returned 404 on 2026-08-19, and no openapi.yaml exists in the cmu-delphi/delphi-epidata repository.
+    coverage: Five of the roughly forty Delphi Epidata endpoints are modelled here — the ones actually probed. The signal-source endpoints (nowcast, flusurv, dengue_nowcast, wiki, ght, quidel, sensors, nidss_*, ecdc_ili, kcdc_ili, paho_dengue, norostat and the rest) share the same envelope and parameter idiom but were not individually probed and are deliberately absent rather than assumed.
+servers:
+- url: https://api.delphi.cmu.edu/epidata
+  description: Production — Delphi Epidata API, operated by Carnegie Mellon University
+tags:
+- name: fluview
+  description: US ILINet influenza-like-illness surveillance (CDC FluView).
+paths:
+  /fluview/:
+    get:
+      tags:
+      - fluview
+      operationId: getFluview
+      summary: Query CDC FluView influenza-like-illness surveillance
+      description: Returns ILINet outpatient influenza-like-illness records for the requested regions and epiweeks, including revision history via `issues`/`lag`. Both `regions` and `epiweeks` are required.
+      parameters:
+      - name: regions
+        in: query
+        required: true
+        description: Comma-separated region identifiers, e.g. `nat`, `hhs1`, `pa`.
+        schema:
+          type: string
+        example: nat
+      - name: epiweeks
+        in: query
+        required: true
+        description: Comma-separated epiweeks (YYYYWW) or ranges (`YYYYWW-YYYYWW`).
+        schema:
+          type: string
+        example: '202001'
+      - name: issues
+        in: query
+        required: false
+        description: Restrict to specific report issues (epiweeks), for revision-aware analysis.
+        schema:
+          type: string
+      - name: lag
+        in: query
+        required: false
+        description: Return only the report published this many weeks after each epiweek.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ILI surveillance records, or an envelope carrying result -1/-2.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EpidataEnvelope'
+              examples:
+                nationalWeek202001:
+                  $ref: '#/components/examples/FluviewRecord'
+                missingParameter:
+                  $ref: '#/components/examples/MissingParameter'
+components:
+  schemas:
+    EpidataEnvelope:
+      type: object
+      description: The response envelope every Delphi Epidata endpoint except /version uses. Note that errors are returned with HTTP 200 and signalled in `result` — a client keying only on the HTTP status will read a failed request as a success.
+      required:
+      - epidata
+      - result
+      - message
+      properties:
+        epidata:
+          type: array
+          description: The result rows; shape varies by endpoint. Empty on error or no-match.
+          items:
+            type: object
+            additionalProperties: true
+        result:
+          type: integer
+          description: Delphi status code. 1 = success, -2 = no results matched, -1 = bad or missing parameters. Not an HTTP status.
+          enum:
+          - 1
+          - -1
+          - -2
+        message:
+          type: string
+          description: '`success`, `no results`, or a human-readable parameter error.'
+          example: success
+  examples:
+    MissingParameter:
+      summary: Error returned with HTTP 200 (probed 2026-08-19)
+      value:
+        epidata: []
+        message: 'missing parameter: need [epiweeks, regions]'
+        result: -1
+    FluviewRecord:
+      summary: National ILI, epiweek 202001 (probed 2026-08-19)
+      value:
+        epidata:
+        - release_date: '2021-10-08'
+          region: nat
+          issue: 202139
+          epiweek: 202001
+          lag: 91
+          num_ili: 88731
+          num_patients: 2394018
+        result: 1
+        message: success

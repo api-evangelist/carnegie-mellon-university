@@ -1,0 +1,39 @@
+openapi: 3.2.0
+info:
+  title: CERT/CC Vulnerability Notes Feeds API
+  version: '1.0'
+  description: 'Public, unauthenticated read API for the CERT Coordination Center''s Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University. Each Vulnerability Note (VU#nnnnnn) is the published result of a coordinated vulnerability disclosure case: overview, impact, resolution, affected systems, CVSS metrics, the CVE identifiers rolled into the case, and the per-vendor status statements CERT/CC collected during coordination. This is one of the very few genuinely institution-engineered public APIs in the higher-education cohort — it is not a repository platform, not a library discovery layer, and not a vendor tenancy. CMU publishes no OpenAPI for it; this document was derived from live probes.'
+  termsOfService: https://www.sei.cmu.edu/legal/
+  contact:
+    name: CERT Coordination Center — Software Engineering Institute, Carnegie Mellon University
+    email: cert@cert.org
+    url: https://www.sei.cmu.edu/divisions/cert/
+  x-operator: institution
+  x-operator-evidence: 'kb.cert.org is not a cmu.edu host, so the cohort audit could not see it — but cert.org is Carnegie Mellon University''s. https://www.cert.org/ 301-redirects to https://www.sei.cmu.edu/divisions/cert/, and the API''s sibling Atom feed at https://kb.cert.org/vuls/atomfeed/ declares <author><name>CERT</name> <email>cert@cert.org</email><uri>https://www.sei.cmu.edu</uri></author>. The CERT Division is a division of the Software Engineering Institute, a federally funded research and development center operated BY Carnegie Mellon University. The documentation hub certcc.github.io links only to sei.cmu.edu legal and privacy notices. Probed 2026-08-19: /vuls/api/421644/ 200 application/json (real Vulnerability Note payload, 8,263 bytes); /vuls/api/421644/vuls/ 200 (10 CVE records); /vuls/api/421644/vendors/ 200 (123 vendor statement records); /vuls/atomfeed/ 200 application/atom+xml.'
+  x-provenance:
+    generated: '2026-08-19'
+    method: derived
+    source: Live probes of https://kb.cert.org/vuls/api/ on 2026-08-19 against three real Vulnerability Notes (VU#421644, VU#257161, VU#730793), with payloads captured into examples/.
+    authorship: 'Written by API Evangelist, not published by Carnegie Mellon University. No OpenAPI, Swagger or schema document is served for this API: /vuls/api/, /vuls/api/docs/ and /vuls/api/summary/ all return the API''s generic JSON error object, and www.kb.cert.org/vuls/api returns 404.'
+    coverage: Three path templates and one feed are modelled — every path confirmed to return a real payload. Paths that returned only the catch-all error object ({"error":"Content requested either does not exist or you do not have permissions to view it!"}) are deliberately excluded rather than guessed at, and are recorded in errors/.
+servers:
+- url: https://kb.cert.org
+  description: Production — CERT/CC Vulnerability Notes, operated by CMU SEI
+tags:
+- name: feeds
+  description: Syndication.
+paths:
+  /vuls/atomfeed/:
+    get:
+      tags:
+      - feeds
+      operationId: getVulnerabilityNotesFeed
+      summary: Atom feed of recently published Vulnerability Notes
+      description: Atom 1.0 feed titled "CERT Recently Published Vulnerability Notes". Each entry links to the human note at /vuls/id/{idnumber}, from which the API path is derivable. The feed's author block is the operator evidence for this whole API.
+      responses:
+        '200':
+          description: Atom 1.0 document.
+          content:
+            application/atom+xml:
+              schema:
+                type: string

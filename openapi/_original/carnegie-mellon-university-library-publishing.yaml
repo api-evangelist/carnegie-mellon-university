@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  title: CMU Library Publishing Service API
+  version: '1.0'
+  description: >-
+    Read API for the Carnegie Mellon University Library Publishing Service, the open-access
+    scholarly publishing programme run by CMU University Libraries. It exposes the five journals
+    CMU publishes — Language Development Research (ISSN 2771-7976), Encyclopedia of the History of
+    Science (2642-5890), MAJAL: CMUQ's Undergraduate Journal, Negotiation and Conflict Management
+    Research (1750-4716) and Tolstoy Studies Journal — along with their issues, articles (379 when
+    probed), keywords, licences and preprint repository objects, plus a full OAI-PMH 2.0 provider.
+    This is the surface the June 2026 profile missed entirely while crediting CMU with figshare's
+    contract: it is self-hosted on lps.library.cmu.edu at 128.2.24.32, inside Carnegie Mellon's own
+    /16, and its OAI-PMH Identify response names Carnegie Mellon University Library Publishing
+    Service as the repository and librarypublishing@andrew.cmu.edu as the administrator.
+  contact:
+    name: Carnegie Mellon University Library Publishing Service
+    email: librarypublishing@andrew.cmu.edu
+    url: https://lps.library.cmu.edu/
+  x-operator: institution
+  x-operator-evidence: >-
+    lps.library.cmu.edu is under Carnegie Mellon University's own registrable domain and resolves
+    to 128.2.24.32 — Carnegie Mellon's own 128.2.0.0/16 address space, not a vendor CDN or cloud
+    tenancy. Contrast kilthub.cmu.edu, which is a CNAME to FIGSHARE.COM and is therefore recorded
+    as `tenant`, and canvas.cmu.edu, which is a CNAME to CMU-VANITY.INSTRUCTURE.COM. The software
+    is Janeway, an open-source publishing platform, but CMU operates the instance: the OAI-PMH
+    Identify response returns repositoryName "Carnegie Mellon University Library Publishing
+    Service" and adminEmail librarypublishing@andrew.cmu.edu, and every journal record carries
+    publisher "Carnegie Mellon University Library Publishing Service". Probed 2026-08-19:
+    /api/ 200 application/json; /api/journals/ 200 (count 5); /api/articles/ 200 (count 379);
+    /api/oai/?verb=Identify 200 application/xml; /api/oai/?verb=ListMetadataFormats 200
+    (oai_dc, jats); /api/oai/?verb=ListRecords&metadataPrefix=oai_dc 200.
+  x-provenance:
+    generated: '2026-08-19'
+    method: derived
+    source: >-
+      Live probes of https://lps.library.cmu.edu/api/ and
+      https://ncmr.lps.library.cmu.edu/api/oai/ on 2026-08-19. The API is a Django REST Framework
+      browsable root that self-describes its collections; every path below was read from that root
+      and confirmed by request.
+    authorship: >-
+      Written by API Evangelist, not published by Carnegie Mellon University. No OpenAPI, schema
+      endpoint or API documentation page is served for this surface.
+    coverage: >-
+      The DRF root advertises eighteen collections (accountrole, journals, issues, articles,
+      licences, keywords, accounts, preprints, repository_licenses, repository_fields,
+      preprint_files, user_preprints, repository_subjects, published_preprints, version_queue,
+      identifiers, user_info, logout). The four public read collections that were probed and
+      returned real data are modelled here; the account- and workflow-scoped collections are
+      listed in x-unmodelled-collections rather than guessed at.
+  x-unmodelled-collections:
+  - accountrole
+  - accounts
+  - licences
+  - repository_licenses
+  - repository_fields
+  - preprint_files
+  - user_preprints
+  - repository_subjects
+  - published_preprints
+  - version_queue
+  - identifiers
+  - user_info
+  - logout
+servers:
+- url: https://lps.library.cmu.edu
+  description: Production — CMU Library Publishing Service (press-wide root)
+- url: https://ncmr.lps.library.cmu.edu
+  description: >-
+    Per-journal host. Each journal answers the same API and OAI-PMH paths scoped to itself; NCMR
+    (Negotiation and Conflict Management Research) is the host that was probed.
+tags:
+- name: journals
+  description: The journals CMU Libraries publishes.
+- name: issues
+  description: Issues within a journal.
+- name: articles
+  description: Published articles.
+- name: preprints
+  description: Preprint repository objects.
+- name: oai-pmh
+  description: OAI-PMH 2.0 metadata harvesting provider.
+paths:
+  /api/:
+    get:
+      tags: [journals]
+      operationId: getApiRoot
+      summary: Django REST Framework API root
+      description: >-
+        Returns a flat object mapping each available collection name to its absolute URL. This is
+        the only discovery surface the API offers — there is no OpenAPI, no schema endpoint and no
+        documentation page.
+      responses:
+        '200':
+          description: Map of collection name to URL.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {type: string, format: uri}
+  /api/journals/:
+    get:
+      tags: [journals]
+      operationId: listJournals
+      summary: List published journals
+      responses:
+        '200':
+          description: Paginated journal list (count 5 when probed 2026-08-19).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResult'
+              example:
+                count: 5
+                next: null
+                previous: null
+                results:
+                - pk: 3
+                  code: LDR
+                  name: Language Development Research
+                  publisher: Carnegie Mellon University Library Publishing Service
+                  issn: 2771-7976
+  /api/issues/:
+    get:
+      tags: [issues]
+      operationId: listIssues
+      summary: List issues
+      parameters:
+      - {name: limit, in: query, schema: {type: integer}}
+      - {name: offset, in: query, schema: {type: integer}}
+      responses:
+        '200':
+          description: Paginated issue list.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PaginatedResult'}
+  /api/articles/:
+    get:
+      tags: [articles]
+      operationId: listArticles
+      summary: List published articles
+      description: >-
+        Returns articles with title, subtitle, abstract (HTML), and links to their issue and
+        journal. Paginated with `limit`/`offset`; the default page size is 100 and `next` carries
+        the absolute URL of the following page.
+      parameters:
+      - {name: limit, in: query, schema: {type: integer, default: 100}}
+      - {name: offset, in: query, schema: {type: integer, default: 0}}
+      responses:
+        '200':
+          description: Paginated article list (count 379 on the NCMR host when probed 2026-08-19).
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PaginatedResult'}
+  /api/preprints/:
+    get:
+      tags: [preprints]
+      operationId: listPreprints
+      summary: List preprint repository objects
+      responses:
+        '200':
+          description: Paginated preprint list.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PaginatedResult'}
+  /api/keywords/:
+    get:
+      tags: [articles]
+      operationId: listKeywords
+      summary: List article keywords
+      responses:
+        '200':
+          description: Paginated keyword list.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PaginatedResult'}
+  /api/oai/:
+    get:
+      tags: [oai-pmh]
+      operationId: oaiPmh
+      summary: OAI-PMH 2.0 metadata harvesting endpoint
+      description: >-
+        A conformant OAI-PMH 2.0 provider operated by CMU on CMU's own host. Identify returns
+        repositoryName "Carnegie Mellon University Library Publishing Service", baseURL
+        https://lps.library.cmu.edu/NCMR/api/oai/, protocolVersion 2.0, adminEmail
+        librarypublishing@andrew.cmu.edu, earliestDatestamp 2008-02-11T22:00:00Z, deletedRecord
+        "no" and granularity YYYY-MM-DDThh:mm:ssZ. ListMetadataFormats advertises `oai_dc` and
+        `jats`. This is the domain-standard conformance point for the education regime's
+        `oai-pmh` target, and unlike most of the cohort it is on the institution's own
+        infrastructure rather than a vendor's shared endpoint.
+      parameters:
+      - name: verb
+        in: query
+        required: true
+        schema:
+          type: string
+          enum: [Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords, GetRecord]
+        example: Identify
+      - name: metadataPrefix
+        in: query
+        required: false
+        schema: {type: string, enum: [oai_dc, jats]}
+      - name: identifier
+        in: query
+        required: false
+        description: Required for GetRecord.
+        schema: {type: string}
+      - name: from
+        in: query
+        required: false
+        schema: {type: string, format: date-time}
+      - name: until
+        in: query
+        required: false
+        schema: {type: string, format: date-time}
+      - name: resumptionToken
+        in: query
+        required: false
+        schema: {type: string}
+      responses:
+        '200':
+          description: >-
+            OAI-PMH 2.0 response document. Protocol errors are returned inside this document as
+            <error code="..."/> with HTTP 200, per the OAI-PMH specification.
+          content:
+            application/xml:
+              schema: {type: string}
+components:
+  schemas:
+    PaginatedResult:
+      type: object
+      description: Django REST Framework limit/offset pagination envelope used by every collection.
+      required: [count, results]
+      properties:
+        count: {type: integer}
+        next: {type: string, format: uri, nullable: true}
+        previous: {type: string, format: uri, nullable: true}
+        results:
+          type: array
+          items: {type: object, additionalProperties: true}
+    Journal:
+      type: object
+      properties:
+        pk: {type: integer}
+        code: {type: string, example: NCMR}
+        name: {type: string}
+        publisher: {type: string, example: Carnegie Mellon University Library Publishing Service}
+        issn: {type: string, nullable: true}
+        description: {type: string, nullable: true}
+        current_issue: {type: string, format: uri, nullable: true}
+        default_cover_image: {type: string, format: uri, nullable: true}
+        issues: {type: array, items: {type: string, format: uri}}
+    Article:
+      type: object
+      properties:
+        pk: {type: integer}
+        title: {type: string}
+        subtitle: {type: string, nullable: true}
+        abstract: {type: string, nullable: true, description: HTML.}

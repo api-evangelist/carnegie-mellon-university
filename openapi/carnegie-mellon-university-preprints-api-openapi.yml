@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: CMU Library Publishing Service Articles API
+  title: CMU Library Publishing Service Preprints API
   version: '1.0'
   description: 'Read API for the Carnegie Mellon University Library Publishing Service, the open-access scholarly publishing programme run by CMU University Libraries. It exposes the five journals CMU publishes — Language Development Research (ISSN 2771-7976), Encyclopedia of the History of Science (2642-5890), MAJAL: CMUQ''s Undergraduate Journal, Negotiation and Conflict Management Research (1750-4716) and Tolstoy Studies Journal — along with their issues, articles (379 when probed), keywords, licences and preprint repository objects, plus a full OAI-PMH 2.0 provider. This is the surface the June 2026 profile missed entirely while crediting CMU with figshare''s contract: it is self-hosted on lps.library.cmu.edu at 128.2.24.32, inside Carnegie Mellon''s own /16, and its OAI-PMH Identify response names Carnegie Mellon University Library Publishing Service as the repository and librarypublishing@andrew.cmu.edu as the administrator.'
   contact:
@@ -35,43 +35,18 @@ servers:
 - url: https://ncmr.lps.library.cmu.edu
   description: Per-journal host. Each journal answers the same API and OAI-PMH paths scoped to itself; NCMR (Negotiation and Conflict Management Research) is the host that was probed.
 tags:
-- name: articles
-  description: Published articles.
+- name: preprints
+  description: Preprint repository objects.
 paths:
-  /api/articles/:
+  /api/preprints/:
     get:
       tags:
-      - articles
-      operationId: listArticles
-      summary: List published articles
-      description: Returns articles with title, subtitle, abstract (HTML), and links to their issue and journal. Paginated with `limit`/`offset`; the default page size is 100 and `next` carries the absolute URL of the following page.
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          default: 100
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          default: 0
+      - preprints
+      operationId: listPreprints
+      summary: List preprint repository objects
       responses:
         '200':
-          description: Paginated article list (count 379 on the NCMR host when probed 2026-08-19).
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedResult'
-  /api/keywords/:
-    get:
-      tags:
-      - articles
-      operationId: listKeywords
-      summary: List article keywords
-      responses:
-        '200':
-          description: Paginated keyword list.
+          description: Paginated preprint list.
           content:
             application/json:
               schema:

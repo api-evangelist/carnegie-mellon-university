@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: CMU Library Publishing Service Articles API
+  title: CMU Library Publishing Service Journals API
   version: '1.0'
   description: 'Read API for the Carnegie Mellon University Library Publishing Service, the open-access scholarly publishing programme run by CMU University Libraries. It exposes the five journals CMU publishes — Language Development Research (ISSN 2771-7976), Encyclopedia of the History of Science (2642-5890), MAJAL: CMUQ''s Undergraduate Journal, Negotiation and Conflict Management Research (1750-4716) and Tolstoy Studies Journal — along with their issues, articles (379 when probed), keywords, licences and preprint repository objects, plus a full OAI-PMH 2.0 provider. This is the surface the June 2026 profile missed entirely while crediting CMU with figshare''s contract: it is self-hosted on lps.library.cmu.edu at 128.2.24.32, inside Carnegie Mellon''s own /16, and its OAI-PMH Identify response names Carnegie Mellon University Library Publishing Service as the repository and librarypublishing@andrew.cmu.edu as the administrator.'
   contact:
@@ -35,47 +35,49 @@ servers:
 - url: https://ncmr.lps.library.cmu.edu
   description: Per-journal host. Each journal answers the same API and OAI-PMH paths scoped to itself; NCMR (Negotiation and Conflict Management Research) is the host that was probed.
 tags:
-- name: articles
-  description: Published articles.
+- name: journals
+  description: The journals CMU Libraries publishes.
 paths:
-  /api/articles/:
+  /api/:
     get:
       tags:
-      - articles
-      operationId: listArticles
-      summary: List published articles
-      description: Returns articles with title, subtitle, abstract (HTML), and links to their issue and journal. Paginated with `limit`/`offset`; the default page size is 100 and `next` carries the absolute URL of the following page.
-      parameters:
-      - name: limit
-        in: query
-        schema:
-          type: integer
-          default: 100
-      - name: offset
-        in: query
-        schema:
-          type: integer
-          default: 0
+      - journals
+      operationId: getApiRoot
+      summary: Django REST Framework API root
+      description: Returns a flat object mapping each available collection name to its absolute URL. This is the only discovery surface the API offers — there is no OpenAPI, no schema endpoint and no documentation page.
       responses:
         '200':
-          description: Paginated article list (count 379 on the NCMR host when probed 2026-08-19).
+          description: Map of collection name to URL.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                  format: uri
+  /api/journals/:
+    get:
+      tags:
+      - journals
+      operationId: listJournals
+      summary: List published journals
+      responses:
+        '200':
+          description: Paginated journal list (count 5 when probed 2026-08-19).
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedResult'
-  /api/keywords/:
-    get:
-      tags:
-      - articles
-      operationId: listKeywords
-      summary: List article keywords
-      responses:
-        '200':
-          description: Paginated keyword list.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedResult'
+              example:
+                count: 5
+                next: null
+                previous: null
+                results:
+                - pk: 3
+                  code: LDR
+                  name: Language Development Research
+                  publisher: Carnegie Mellon University Library Publishing Service
+                  issn: 2771-7976
 components:
   schemas:
     PaginatedResult:

@@ -1,0 +1,351 @@
+openapi: 3.2.0
+info:
+  title: CERT/CC Vulnerability Notes API
+  version: '1.0'
+  description: 'Public, unauthenticated read API for the CERT Coordination Center''s Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University. Each Vulnerability Note (VU#nnnnnn) is the published result of a coordinated vulnerability disclosure case: overview, impact, resolution, affected systems, CVSS metrics, the CVE identifiers rolled into the case, and the per-vendor status statements CERT/CC collected during coordination. This is one of the very few genuinely institution-engineered public APIs in the higher-education cohort — it is not a repository platform, not a library discovery layer, and not a vendor tenancy. CMU publishes no OpenAPI for it; this document was derived from live probes.'
+  termsOfService: https://www.sei.cmu.edu/legal/
+  contact:
+    name: CERT Coordination Center — Software Engineering Institute, Carnegie Mellon University
+    email: cert@cert.org
+    url: https://www.sei.cmu.edu/divisions/cert/
+  x-operator: institution
+  x-operator-evidence: 'kb.cert.org is not a cmu.edu host, so the cohort audit could not see it — but cert.org is Carnegie Mellon University''s. https://www.cert.org/ 301-redirects to https://www.sei.cmu.edu/divisions/cert/, and the API''s sibling Atom feed at https://kb.cert.org/vuls/atomfeed/ declares <author><name>CERT</name> <email>cert@cert.org</email><uri>https://www.sei.cmu.edu</uri></author>. The CERT Division is a division of the Software Engineering Institute, a federally funded research and development center operated BY Carnegie Mellon University. The documentation hub certcc.github.io links only to sei.cmu.edu legal and privacy notices. Probed 2026-08-19: /vuls/api/421644/ 200 application/json (real Vulnerability Note payload, 8,263 bytes); /vuls/api/421644/vuls/ 200 (10 CVE records); /vuls/api/421644/vendors/ 200 (123 vendor statement records); /vuls/atomfeed/ 200 application/atom+xml.'
+  x-provenance:
+    generated: '2026-08-19'
+    method: derived
+    source: Live probes of https://kb.cert.org/vuls/api/ on 2026-08-19 against three real Vulnerability Notes (VU#421644, VU#257161, VU#730793), with payloads captured into examples/.
+    authorship: 'Written by API Evangelist, not published by Carnegie Mellon University. No OpenAPI, Swagger or schema document is served for this API: /vuls/api/, /vuls/api/docs/ and /vuls/api/summary/ all return the API''s generic JSON error object, and www.kb.cert.org/vuls/api returns 404.'
+    coverage: Three path templates and one feed are modelled — every path confirmed to return a real payload. Paths that returned only the catch-all error object ({"error":"Content requested either does not exist or you do not have permissions to view it!"}) are deliberately excluded rather than guessed at, and are recorded in errors/.
+servers:
+- url: https://kb.cert.org
+  description: Production — CERT/CC Vulnerability Notes, operated by CMU SEI
+tags:
+- name: notes
+  description: Vulnerability Notes.
+paths:
+  /vuls/api/{idnumber}/:
+    get:
+      tags:
+      - notes
+      operationId: getVulnerabilityNote
+      summary: Get a Vulnerability Note by its VU number
+      description: Returns the full Vulnerability Note record for the given VU number (the numeric part of VU#nnnnnn, no hash). Unknown or unpublished identifiers return HTTP 200 with a JSON error object, not a 404.
+      parameters:
+      - name: idnumber
+        in: path
+        required: true
+        description: Numeric Vulnerability Note identifier, e.g. 421644 for VU#421644.
+        schema:
+          type: string
+          pattern: ^[0-9]{6}$
+        example: '421644'
+      responses:
+        '200':
+          description: The Vulnerability Note, or the generic error object if not found.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/VulnerabilityNote'
+                - $ref: '#/components/schemas/Error'
+              examples:
+                note:
+                  $ref: '#/components/examples/VulnerabilityNoteExample'
+                notFound:
+                  $ref: '#/components/examples/ErrorExample'
+  /vuls/api/{idnumber}/vuls/:
+    get:
+      tags:
+      - notes
+      operationId: listNoteVulnerabilities
+      summary: List the CVE records rolled into a Vulnerability Note
+      description: Returns the individual vulnerabilities (CVE identifiers with descriptions) that the named coordination case covers. A single Vulnerability Note routinely covers several CVEs.
+      parameters:
+      - name: idnumber
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: ^[0-9]{6}$
+        example: '421644'
+      responses:
+        '200':
+          description: Array of CVE records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NoteVulnerability'
+              example:
+              - note: '421644'
+                cve: 2024-27268
+                description: IBM WebSphere Application Server Liberty is vulnerable to a denial of service.
+                case_increment: 1
+                date_added: '2024-04-03T17:15:19Z'
+components:
+  examples:
+    ErrorExample:
+      summary: Unknown identifier, returned with HTTP 200 (probed 2026-08-19)
+      value:
+        error: Content requested either does not exist or you do not have permissions to view it!
+    VulnerabilityNoteExample:
+      summary: VU#421644 (probed 2026-08-19)
+      value:
+        vuid: VU#421644
+        idnumber: '421644'
+        name: HTTP/2 CONTINUATION frames can be utilized for DoS attacks
+        keywords: null
+  schemas:
+    NoteVulnerability:
+      type: object
+      properties:
+        note:
+          type: string
+        cve:
+          type: string
+          description: CVE identifier WITHOUT the "CVE-" prefix, e.g. 2024-27268.
+        description:
+          type: string
+        uid:
+          type:
+          - string
+          - 'null'
+        case_increment:
+          type:
+          - integer
+          - 'null'
+        date_added:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateupdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    VulnerabilityNote:
+      type: object
+      description: A CERT/CC Vulnerability Note. Field names are the API's own, verbatim.
+      properties:
+        vuid:
+          type: string
+          example: VU#421644
+        idnumber:
+          type: string
+          example: '421644'
+        name:
+          type: string
+          example: HTTP/2 CONTINUATION frames can be utilized for DoS attacks
+        keywords:
+          type:
+          - string
+          - 'null'
+        overview:
+          type: string
+          description: Markdown overview of the vulnerability.
+        clean_desc:
+          type:
+          - string
+          - 'null'
+        impact:
+          type: string
+        resolution:
+          type: string
+        workarounds:
+          type:
+          - string
+          - 'null'
+        sysaffected:
+          type:
+          - string
+          - 'null'
+          description: Affected systems.
+        thanks:
+          type:
+          - string
+          - 'null'
+          description: Credit to the reporter.
+        author:
+          type:
+          - string
+          - 'null'
+        public:
+          type: array
+          items:
+            type: string
+          description: Public references.
+        cveids:
+          type: array
+          items:
+            type: string
+        certadvisory:
+          type:
+          - string
+          - 'null'
+        uscerttechnicalalert:
+          type:
+          - string
+          - 'null'
+        datecreated:
+          type: string
+          format: date-time
+        publicdate:
+          type: string
+          format: date-time
+        datefirstpublished:
+          type: string
+          format: date-time
+        dateupdated:
+          type: string
+          format: date-time
+        revision:
+          type: integer
+        ipprotocol:
+          type:
+          - string
+          - 'null'
+        metric:
+          type:
+          - number
+          - 'null'
+        vulnote:
+          type:
+          - string
+          - 'null'
+        vrda_d1_directreport:
+          type:
+          - string
+          - 'null'
+        vrda_d1_population:
+          type:
+          - string
+          - 'null'
+        vrda_d1_impact:
+          type:
+          - string
+          - 'null'
+        cam_widelyknown:
+          type:
+          - string
+          - 'null'
+        cam_exploitation:
+          type:
+          - string
+          - 'null'
+        cam_internetinfrastructure:
+          type:
+          - string
+          - 'null'
+        cam_population:
+          type:
+          - string
+          - 'null'
+        cam_impact:
+          type:
+          - string
+          - 'null'
+        cam_easeofexploitation:
+          type:
+          - string
+          - 'null'
+        cam_attackeraccessrequired:
+          type:
+          - string
+          - 'null'
+        cam_scorecurrent:
+          type:
+          - number
+          - 'null'
+        cam_scorecurrentwidelyknown:
+          type:
+          - number
+          - 'null'
+        cam_scorecurrentwidelyknownexploited:
+          type:
+          - number
+          - 'null'
+        cvss_accessvector:
+          type:
+          - string
+          - 'null'
+        cvss_accesscomplexity:
+          type:
+          - string
+          - 'null'
+        cvss_authentication:
+          type:
+          - string
+          - 'null'
+        cvss_confidentialityimpact:
+          type:
+          - string
+          - 'null'
+        cvss_integrityimpact:
+          type:
+          - string
+          - 'null'
+        cvss_availabilityimpact:
+          type:
+          - string
+          - 'null'
+        cvss_exploitablity:
+          type:
+          - string
+          - 'null'
+          description: Spelled this way by the API.
+        cvss_remediationlevel:
+          type:
+          - string
+          - 'null'
+        cvss_reportconfidence:
+          type:
+          - string
+          - 'null'
+        cvss_collateraldamagepotential:
+          type:
+          - string
+          - 'null'
+        cvss_targetdistribution:
+          type:
+          - string
+          - 'null'
+        cvss_securityrequirementscr:
+          type:
+          - string
+          - 'null'
+        cvss_securityrequirementsir:
+          type:
+          - string
+          - 'null'
+        cvss_securityrequirementsar:
+          type:
+          - string
+          - 'null'
+        cvss_basescore:
+          type:
+          - number
+          - 'null'
+        cvss_basevector:
+          type:
+          - string
+          - 'null'
+        cvss_temporalscore:
+          type:
+          - number
+          - 'null'
+        cvss_environmentalscore:
+          type:
+          - number
+          - 'null'
+        cvss_environmentalvector:
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      description: The API's single, undifferentiated error object. It is returned with HTTP 200 for a valid-shaped but unknown identifier, and it does not distinguish "not found" from "not permitted".
+      properties:
+        error:
+          type: string
