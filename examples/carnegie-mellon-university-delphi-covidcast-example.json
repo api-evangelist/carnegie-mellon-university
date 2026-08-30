@@ -1,0 +1,31 @@
+{
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://api.delphi.cmu.edu/epidata/covidcast/?data_source=jhu-csse&signal=confirmed_incidence_num&time_type=day&geo_type=state&time_values=20200601&geo_value=pa",
+    "authorship": "Captured live by API Evangelist from the institution-operated endpoint named in source; payload truncated for size, values unedited."
+  },
+  "example": {
+    "epidata": [
+      {
+        "geo_value": "pa",
+        "signal": "confirmed_incidence_num",
+        "source": "jhu-csse",
+        "geo_type": "state",
+        "time_type": "day",
+        "time_value": 20200601,
+        "direction": null,
+        "issue": 20230303,
+        "lag": 1005,
+        "missing_value": 0,
+        "missing_stderr": 5,
+        "missing_sample_size": 5,
+        "value": 382.0,
+        "stderr": null,
+        "sample_size": null
+      }
+    ],
+    "result": 1,
+    "message": "success"
+  }
+}

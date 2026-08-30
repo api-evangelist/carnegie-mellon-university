@@ -1,0 +1,32 @@
+{
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://api.delphi.cmu.edu/epidata/fluview/?regions=nat&epiweeks=202001",
+    "authorship": "Captured live by API Evangelist from the institution-operated endpoint named in source; payload truncated for size, values unedited."
+  },
+  "example": {
+    "epidata": [
+      {
+        "release_date": "2021-10-08",
+        "region": "nat",
+        "issue": 202139,
+        "epiweek": 202001,
+        "lag": 91,
+        "num_ili": 88731,
+        "num_patients": 1426691,
+        "num_providers": 2970,
+        "num_age_0": 21594,
+        "num_age_1": 23392,
+        "num_age_2": null,
+        "num_age_3": 27655,
+        "num_age_4": 9209,
+        "num_age_5": 6881,
+        "wili": 5.90066,
+        "ili": 6.21936
+      }
+    ],
+    "result": 1,
+    "message": "success"
+  }
+}

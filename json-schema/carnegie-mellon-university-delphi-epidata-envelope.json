@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/main/json-schema/carnegie-mellon-university-delphi-epidata-envelope.json",
+  "title": "Delphi Epidata response envelope",
+  "description": "The response envelope every Delphi Epidata endpoint except /version returns. Errors arrive with HTTP 200 and are signalled only in `result`, so this schema is the contract a client must validate against rather than trusting the status code.",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "openapi/carnegie-mellon-university-delphi-epidata-openapi.yml, itself derived from live probes of https://api.delphi.cmu.edu/epidata/ on 2026-08-19",
+    "x-operator": "institution",
+    "authorship": "Written by API Evangelist. Carnegie Mellon University publishes no JSON Schema for this API."
+  },
+  "type": "object",
+  "required": ["epidata", "result", "message"],
+  "properties": {
+    "epidata": {
+      "type": "array",
+      "description": "Result rows. Shape varies by endpoint; empty on error or no-match.",
+      "items": { "type": "object" }
+    },
+    "result": {
+      "type": "integer",
+      "description": "Delphi status convention: 1 success, -2 no results, -1 bad/missing parameters. NOT an HTTP status.",
+      "enum": [1, -1, -2]
+    },
+    "message": {
+      "type": "string",
+      "description": "'success', 'no results', or a human-readable parameter error."
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "FluviewRow": {
+      "type": "object",
+      "description": "One CDC ILINet surveillance record from /fluview/.",
+      "properties": {
+        "release_date": { "type": "string", "format": "date" },
+        "region": { "type": "string" },
+        "issue": { "type": "integer", "description": "Epiweek in which this revision was published." },
+        "epiweek": { "type": "integer" },
+        "lag": { "type": "integer" },
+        "num_ili": { "type": "integer" },
+        "num_patients": { "type": "integer" },
+        "num_providers": { "type": "integer" },
+        "wili": { "type": "number" },
+        "ili": { "type": "number" }
+      },
+      "required": ["region", "epiweek", "issue"]
+    },
+    "CovidcastRow": {
+      "type": "object",
+      "description": "One COVIDcast observation from /covidcast/.",
+      "properties": {
+        "geo_value": { "type": "string" },
+        "signal": { "type": "string" },
+        "source": { "type": "string" },
+        "geo_type": { "type": "string", "enum": ["county", "hrr", "msa", "dma", "state", "hhs", "nation"] },
+        "time_type": { "type": "string", "enum": ["day", "week"] },
+        "time_value": { "type": "integer" },
+        "issue": { "type": "integer" },
+        "lag": { "type": "integer" },
+        "value": { "type": "number" },
+        "stderr": { "type": ["number", "null"] },
+        "sample_size": { "type": ["number", "null"] }
+      },
+      "required": ["geo_value", "signal", "source", "geo_type", "time_type"]
+    }
+  }
+}

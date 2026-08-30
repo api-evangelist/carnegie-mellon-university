@@ -1,0 +1,14 @@
+{
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://api.delphi.cmu.edu/epidata/fluview/",
+    "authorship": "Captured live by API Evangelist from the institution-operated endpoint named in source; payload truncated for size, values unedited.",
+    "notes": "Delphi returns parameter errors with HTTP 200 and signals failure in `result` (-1). A client keying only on the HTTP status reads this as a success."
+  },
+  "example": {
+    "epidata": [],
+    "message": "missing parameter: need [epiweeks, regions]",
+    "result": -1
+  }
+}

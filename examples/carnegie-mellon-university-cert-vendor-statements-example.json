@@ -1,0 +1,41 @@
+{
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://kb.cert.org/vuls/api/421644/vendors/",
+    "authorship": "Captured live by API Evangelist from the institution-operated endpoint named in source; payload truncated for size, values unedited.",
+    "notes": "First 3 of 123 vendor coordination records returned for VU#421644 on 2026-08-19."
+  },
+  "example": [
+    {
+      "note": "421644",
+      "contact_date": "2024-02-19T15:21:17.589549Z",
+      "vendor": "Yahoo Inc.",
+      "references": null,
+      "statement": null,
+      "dateupdated": "2024-04-03T17:15:19.803945Z",
+      "statement_date": null,
+      "addendum": null
+    },
+    {
+      "note": "421644",
+      "contact_date": "2024-02-19T18:33:43.515498Z",
+      "vendor": "NGINX",
+      "references": null,
+      "statement": null,
+      "dateupdated": "2024-04-03T17:15:19.794200Z",
+      "statement_date": null,
+      "addendum": null
+    },
+    {
+      "note": "421644",
+      "contact_date": "2024-02-26T13:49:04.322999Z",
+      "vendor": "IETF HTTP Working Group",
+      "references": "https://httpwg.org/specs/rfc9113.html#dos",
+      "statement": "This is not a specification vulnerability.\r\n\r\nRFC 9113 already cautions implementations about the possibility of Denial of Service due to 'large numbers of small or empty frames.'",
+      "dateupdated": "2024-04-03T17:15:19.589132Z",
+      "statement_date": "2024-04-02T22:30:14.876352Z",
+      "addendum": null
+    }
+  ]
+}

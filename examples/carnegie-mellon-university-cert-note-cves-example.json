@@ -1,0 +1,29 @@
+{
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "https://kb.cert.org/vuls/api/421644/vuls/",
+    "authorship": "Captured live by API Evangelist from the institution-operated endpoint named in source; payload truncated for size, values unedited.",
+    "notes": "First 2 of 10 CVE records rolled into VU#421644."
+  },
+  "example": [
+    {
+      "note": "421644",
+      "cve": "2024-27268",
+      "description": "IBM WebSphere Application Server Liberty 18.0.0.2 through 24.0.0.3 is vulnerable to a denial of service, caused by sending a specially crafted request. A remote attacker could exploit this vulnerability to cause the server to consume memory resources.",
+      "uid": "CVE-2024-27268",
+      "case_increment": 12,
+      "date_added": "2024-05-03T16:05:13.631946Z",
+      "dateupdated": "2024-07-19T11:21:11.943626Z"
+    },
+    {
+      "note": "421644",
+      "cve": "2024-28182",
+      "description": "An implementation using the nghttp2 library will continue to receive CONTINUATION frames, and will not callback to the application to allow visibility into this information before it resets the stream, resulting in a DoS.",
+      "uid": "CVE-2024-28182",
+      "case_increment": 5,
+      "date_added": "2024-04-03T17:15:18.167112Z",
+      "dateupdated": "2024-07-19T11:21:12.001732Z"
+    }
+  ]
+}
