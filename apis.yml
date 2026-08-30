@@ -172,6 +172,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Articles
+  tags_raw:
   - articles
   properties:
   - type: OpenAPI
@@ -228,6 +230,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Feeds
+  tags_raw:
   - feeds
   properties:
   - type: OpenAPI
@@ -284,6 +288,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Forecast
+  tags_raw:
   - forecasts
   properties:
   - type: OpenAPI
@@ -312,6 +318,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Issues
+  tags_raw:
   - issues
   properties:
   - type: OpenAPI
@@ -340,6 +348,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Journals
+  tags_raw:
   - journals
   properties:
   - type: OpenAPI
@@ -368,6 +378,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Meta
+  tags_raw:
   - meta
   properties:
   - type: OpenAPI
@@ -396,6 +408,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Notes
+  tags_raw:
   - notes
   properties:
   - type: OpenAPI
@@ -424,6 +438,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - OAI-PMH
+  tags_raw:
   - oai-pmh
   properties:
   - type: OpenAPI
@@ -452,6 +468,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Preprints
+  tags_raw:
   - preprints
   properties:
   - type: OpenAPI
@@ -480,6 +498,8 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
+  - Vendors
+  tags_raw:
   - vendors
   properties:
   - type: OpenAPI
