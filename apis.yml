@@ -523,6 +523,9 @@ apis:
   - type: Documentation
     url: https://lps.library.cmu.edu/
 common:
+- type: License
+  name: MIT
+  url: https://github.com/cmu-delphi/delphi-epidata/blob/dev/LICENSE
 - type: Website
   url: https://www.cmu.edu/
 - type: Documentation
