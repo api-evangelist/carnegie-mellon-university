@@ -113,6 +113,11 @@ apis:
   - Institutional Repository
   - Research Data
   - Open Access
+  - Tenants
+  tags_raw:
+  - Institutional Repository
+  - Research Data
+  - Open Access
   - Tenant
   x-operator: tenant
   x-vendor: figshare
@@ -136,6 +141,10 @@ apis:
   tags:
   - Learning Management
   - LTI
+  - Tenants
+  tags_raw:
+  - Learning Management
+  - LTI
   - Tenant
   x-operator: tenant
   x-vendor: Instructure
@@ -157,6 +166,11 @@ apis:
   humanURL: https://cmueats.com/
   baseURL: https://api.cmueats.com/v2
   tags:
+  - Campus Life
+  - Dining
+  - Student Built
+  - Tenants
+  tags_raw:
   - Campus Life
   - Dining
   - Student Built
@@ -230,7 +244,7 @@ apis:
   humanURL: https://cmu-delphi.github.io/delphi-epidata/
   baseURL: https://api.delphi.cmu.edu/epidata
   tags:
-  - Feeds
+  - Feed
   tags_raw:
   - feeds
   properties:
