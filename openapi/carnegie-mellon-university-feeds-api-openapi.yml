@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: CERT/CC Vulnerability Notes Feeds API
   version: '1.0'
-  description: 'Public, unauthenticated read API for the CERT Coordination Center''s Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University. Each Vulnerability Note (VU#nnnnnn) is the published result of a coordinated vulnerability disclosure case: overview, impact, resolution, affected systems, CVSS metrics, the CVE identifiers rolled into the case, and the per-vendor status statements CERT/CC collected during coordination. This is one of the very few genuinely institution-engineered public APIs in the higher-education cohort — it is not a repository platform, not a library discovery layer, and not a vendor tenancy. CMU publishes no OpenAPI for it; this document was derived from live probes.'
+  description: Public, unauthenticated read API for the CERT Coordination Center's Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University.
   termsOfService: https://www.sei.cmu.edu/legal/
   contact:
     name: CERT Coordination Center — Software Engineering Institute, Carnegie Mellon University
@@ -20,13 +20,13 @@ servers:
 - url: https://kb.cert.org
   description: Production — CERT/CC Vulnerability Notes, operated by CMU SEI
 tags:
-- name: feeds
+- name: Feeds
   description: Syndication.
 paths:
   /vuls/atomfeed/:
     get:
       tags:
-      - feeds
+      - Feeds
       operationId: getVulnerabilityNotesFeed
       summary: Atom feed of recently published Vulnerability Notes
       description: Atom 1.0 feed titled "CERT Recently Published Vulnerability Notes". Each entry links to the human note at /vuls/id/{idnumber}, from which the API path is derivable. The feed's author block is the operator evidence for this whole API.

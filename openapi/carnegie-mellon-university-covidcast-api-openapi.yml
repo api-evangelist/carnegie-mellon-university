@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Delphi Epidata Covidcast API
   version: 4.1.44
-  description: 'Public, anonymously accessible HTTP/JSON API operated by the Delphi research group at Carnegie Mellon University, serving real-time and historical epidemiological surveillance data. Delphi is a CMU research group (Machine Learning Department / Herbert A. Simon building, delphi.cmu.edu) and a former CDC Center of Excellence for Influenza Forecasting. The API is a single-host, query-parameter-driven surface: every endpoint is a GET under /epidata/, every response is a JSON envelope of {epidata, result, message}, and `result` carries Delphi''s own status convention (1 = success, -2 = no results, -1 = bad request) rather than relying on the HTTP status code alone. CMU publishes no OpenAPI, GraphQL schema or machine-readable contract for this API; this document was derived from live probes and from the prose documentation at cmu-delphi.github.io/delphi-epidata.'
+  description: Public, anonymously accessible HTTP/JSON API operated by the Delphi research group at Carnegie Mellon University, serving real-time and historical epidemiological surveillance data.
   termsOfService: https://cmu-delphi.github.io/delphi-epidata/
   contact:
     name: Carnegie Mellon University — Delphi Research Group
@@ -110,6 +110,18 @@ paths:
                 observations:
                   $ref: '#/components/examples/CovidcastObservation'
 components:
+  examples:
+    CovidcastObservation:
+      summary: JHU-CSSE confirmed incidence, Pennsylvania, 2020-06-01 (probed 2026-08-19)
+      value:
+        epidata:
+        - geo_value: pa
+          signal: confirmed_incidence_num
+          source: jhu-csse
+          geo_type: state
+          time_type: day
+        result: 1
+        message: success
   schemas:
     EpidataEnvelope:
       type: object
@@ -136,15 +148,3 @@ components:
           type: string
           description: '`success`, `no results`, or a human-readable parameter error.'
           example: success
-  examples:
-    CovidcastObservation:
-      summary: JHU-CSSE confirmed incidence, Pennsylvania, 2020-06-01 (probed 2026-08-19)
-      value:
-        epidata:
-        - geo_value: pa
-          signal: confirmed_incidence_num
-          source: jhu-csse
-          geo_type: state
-          time_type: day
-        result: 1
-        message: success

@@ -1,0 +1,150 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of Carnegie Mellon-operated hosts on 2026-08-19, run as part of the API Evangelist
+  university pipeline. Every hit below points at the exact URL that returned the evidence; no
+  conformance is recorded from a prose claim, and each carries the operator of the surface that
+  satisfies it.
+provider: Carnegie Mellon University
+providerId: carnegie-mellon-university
+regime: education
+description: >-
+  Conformance of Carnegie Mellon University's machine-readable surfaces against the Kin Score
+  `education` regime standards (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth,
+  saml, orcid, datacite, crossref). Reward-only: an entry under not_found means "not found on a
+  public surface on 2026-08-19", not "not in use internally". Operator is recorded per standard,
+  because for a university the same standard can be satisfied by the institution's own
+  engineering (CMU's OAI-PMH provider) or by a vendor's product running on a CMU vanity hostname
+  (Canvas LTI) — and those are not the same fact.
+standards:
+- id: oai-pmh
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://ncmr.lps.library.cmu.edu/api/oai/?verb=Identify
+    status: 200
+    content_type: application/xml
+    detail: >-
+      A conformant OAI-PMH 2.0 provider on Carnegie Mellon's own infrastructure. Identify returns
+      repositoryName "Carnegie Mellon University Library Publishing Service", baseURL
+      https://lps.library.cmu.edu/NCMR/api/oai/, protocolVersion 2.0, adminEmail
+      librarypublishing@andrew.cmu.edu, earliestDatestamp 2008-02-11T22:00:00Z, deletedRecord
+      "no", granularity YYYY-MM-DDThh:mm:ssZ. The host lps.library.cmu.edu resolves to
+      128.2.24.32, inside CMU's own 128.2.0.0/16 — this is CMU's own machine, not a vendor
+      endpoint with a CMU set on it.
+  additional_evidence:
+  - url: https://ncmr.lps.library.cmu.edu/api/oai/?verb=ListMetadataFormats
+    status: 200
+    note: Advertises two metadata prefixes, oai_dc and jats.
+  - url: https://ncmr.lps.library.cmu.edu/api/oai/?verb=ListRecords&metadataPrefix=oai_dc
+    status: 200
+    note: Returns real records.
+- id: shibboleth
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://login.cmu.edu/idp/shibboleth
+    status: 200
+    content_type: application/xml
+    detail: >-
+      CMU Web Login publishes SAML 2.0 metadata at the canonical Shibboleth /idp/shibboleth
+      location. The document is an <EntityDescriptor> with
+      entityID="https://login.cmu.edu/idp/shibboleth" carrying a shibmd (urn:mace:shibboleth)
+      namespace declaration, which identifies the implementation as Shibboleth specifically
+      rather than SAML generically. login.cmu.edu resolves to 128.2.42.22, CMU's own address
+      space.
+  additional_evidence:
+  - url: https://canvas.cmu.edu/
+    status: 200
+    note: >-
+      Canvas redirects unauthenticated users to
+      https://login.cmu.edu/idp/profile/SAML2/Redirect/SSO, confirming the IdP is the live
+      campus authentication path and not merely a published metadata file.
+- id: saml
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://mdq.incommon.org/entities/https%3A%2F%2Flogin.cmu.edu%2Fidp%2Fshibboleth
+    status: 200
+    content_type: application/samlmetadata+xml
+    detail: >-
+      CMU's identity provider is a registered InCommon — and thereby eduGAIN — entity: the
+      InCommon MDQ service returns a signed SAML 2.0 EntityDescriptor for entityID
+      https://login.cmu.edu/idp/shibboleth. The IdP's own metadata asserts the entity category
+      http://id.incommon.org/category/research-and-scholarship, which is a machine-readable
+      commitment to release a defined attribute bundle to R&S service providers. Federation
+      membership is an institution-operated fact by definition; no vendor sits between CMU and
+      this metadata.
+- id: datacite
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://api.datacite.org/repositories/cmu.lps
+    status: 200
+    content_type: application/vnd.api+json
+    detail: >-
+      Carnegie Mellon University Library Publishing Service is a registered DataCite repository
+      (client id cmu.lps, created 2019-04-25) with 545 DOIs minted under its own prefixes,
+      including 10.34891 and 10.34842. Crucially the DOIs resolve to CMU's own infrastructure —
+      10.34891/j000-sx47 targets https://ncmr.lps.library.cmu.edu/article/id/1029/ — so this is
+      CMU minting persistent identifiers for content CMU itself hosts, not a vendor platform
+      minting on CMU's behalf.
+  additional_evidence:
+  - url: https://api.datacite.org/dois?client-id=cmu.lps
+    status: 200
+    note: 545 DOIs registered to the CMU Library Publishing Service repository.
+- id: lti
+  status: conformant
+  operator: tenant
+  evidence:
+    url: https://canvas.cmu.edu/api/lti/security/jwks
+    status: 200
+    content_type: application/json
+    detail: >-
+      An LTI 1.3 / LTI Advantage JWKS is served on a CMU hostname, so the standard is genuinely
+      in play in CMU's learning environment. It is recorded as `tenant`, not `institution`,
+      because canvas.cmu.edu is a CNAME to CMU-VANITY.INSTRUCTURE.COM: the LTI implementation,
+      the key rotation and the contract are Instructure's, running under a CMU vanity name. The
+      tool deployments and the courses behind them are CMU's; the LTI engineering is not. This
+      is the exact distinction the university pipeline exists to preserve.
+not_found:
+- id: scim
+  detail: >-
+    No public SCIM 2.0 endpoint or SCIM documentation found on a CMU-operated host. CMU's
+    identity integration story is expressed through SAML attribute release, not SCIM
+    provisioning, on every public surface probed.
+- id: oneroster
+  detail: No IMS/1EdTech OneRoster endpoint found on a CMU-operated host.
+- id: ed-fi
+  detail: Ed-Fi is a K-12 data standard; no CMU surface implements it.
+- id: caliper
+  detail: >-
+    No Caliper Analytics event store or endpoint found on a public CMU host. Any Caliper emission
+    from Canvas would belong to Instructure's contract, as with LTI above.
+- id: qti
+  detail: No public QTI assessment interchange surface found on a CMU-operated host.
+- id: orcid
+  detail: >-
+    No CMU-operated ORCID-integrated public API found. The Library Publishing Service's Janeway
+    instance exposes an /api/identifiers/ collection, but it was not confirmed to carry ORCID
+    identifiers and no ORCID member API integration is advertised on a CMU host. KiltHub's ORCID
+    linkage, where present, is figshare's feature.
+- id: crossref
+  detail: >-
+    CMU is not a Crossref member — https://api.crossref.org/members?query=carnegie+mellon returns
+    total-results 0 (probed 2026-08-19). CMU's persistent-identifier practice runs through
+    DataCite, not Crossref.
+tenant_and_vendor_notes:
+- surface: https://api.figshare.com/v2/oai
+  operator: vendor
+  detail: >-
+    KiltHub's records are harvestable over OAI-PMH, but not from a CMU endpoint. The Identify
+    response at https://api.figshare.com/v2/oai returns repositoryName "figshare" on figshare's
+    own shared host; CMU's content is addressed as a set (set=portal_231), which returns real CMU
+    records. kilthub.cmu.edu itself is a CNAME to FIGSHARE.COM and answers 202 with an empty body
+    to non-browser clients — /oai and /api/oai on that host return no OAI-PMH document at all.
+    This is therefore recorded as the tenant relationship it is, and NOT as CMU oai-pmh
+    conformance. The June 2026 profile recorded the same endpoint as evidence of a CMU surface.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

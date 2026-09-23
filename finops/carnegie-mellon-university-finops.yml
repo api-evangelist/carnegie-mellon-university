@@ -4,8 +4,12 @@ schema: https://www.finops.org/framework/
 provider: Carnegie Mellon University
 providerId: carnegie-mellon-university
 created: '2026-06-03'
-modified: '2026-06-03'
-reconciled: false
+modified: '2026-08-19'
+reconciled: true
+generated: '2026-08-19'
+method: derived
+source: plans/carnegie-mellon-university-plans-pricing.yml
+x-operator: institution
 tags:
 - Education
 - Higher Education

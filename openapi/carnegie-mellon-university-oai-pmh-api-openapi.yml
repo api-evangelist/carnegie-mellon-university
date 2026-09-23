@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: CMU Library Publishing Service Oai Pmh API
   version: '1.0'
-  description: 'Read API for the Carnegie Mellon University Library Publishing Service, the open-access scholarly publishing programme run by CMU University Libraries. It exposes the five journals CMU publishes — Language Development Research (ISSN 2771-7976), Encyclopedia of the History of Science (2642-5890), MAJAL: CMUQ''s Undergraduate Journal, Negotiation and Conflict Management Research (1750-4716) and Tolstoy Studies Journal — along with their issues, articles (379 when probed), keywords, licences and preprint repository objects, plus a full OAI-PMH 2.0 provider. This is the surface the June 2026 profile missed entirely while crediting CMU with figshare''s contract: it is self-hosted on lps.library.cmu.edu at 128.2.24.32, inside Carnegie Mellon''s own /16, and its OAI-PMH Identify response names Carnegie Mellon University Library Publishing Service as the repository and librarypublishing@andrew.cmu.edu as the administrator.'
+  description: Read API for the Carnegie Mellon University Library Publishing Service, the open-access scholarly publishing programme run by CMU University Libraries.
   contact:
     name: Carnegie Mellon University Library Publishing Service
     email: librarypublishing@andrew.cmu.edu
@@ -35,13 +35,13 @@ servers:
 - url: https://ncmr.lps.library.cmu.edu
   description: Per-journal host. Each journal answers the same API and OAI-PMH paths scoped to itself; NCMR (Negotiation and Conflict Management Research) is the host that was probed.
 tags:
-- name: oai-pmh
+- name: oai pmh
   description: OAI-PMH 2.0 metadata harvesting provider.
 paths:
   /api/oai/:
     get:
       tags:
-      - oai-pmh
+      - oai pmh
       operationId: oaiPmh
       summary: OAI-PMH 2.0 metadata harvesting endpoint
       description: A conformant OAI-PMH 2.0 provider operated by CMU on CMU's own host. Identify returns repositoryName "Carnegie Mellon University Library Publishing Service", baseURL https://lps.library.cmu.edu/NCMR/api/oai/, protocolVersion 2.0, adminEmail librarypublishing@andrew.cmu.edu, earliestDatestamp 2008-02-11T22:00:00Z, deletedRecord "no" and granularity YYYY-MM-DDThh:mm:ssZ. ListMetadataFormats advertises `oai_dc` and `jats`. This is the domain-standard conformance point for the education regime's `oai-pmh` target, and unlike most of the cohort it is on the institution's own infrastructure rather than a vendor's shared endpoint.

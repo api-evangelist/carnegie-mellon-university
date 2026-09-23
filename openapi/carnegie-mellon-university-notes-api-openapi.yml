@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: CERT/CC Vulnerability Notes API
   version: '1.0'
-  description: 'Public, unauthenticated read API for the CERT Coordination Center''s Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University. Each Vulnerability Note (VU#nnnnnn) is the published result of a coordinated vulnerability disclosure case: overview, impact, resolution, affected systems, CVSS metrics, the CVE identifiers rolled into the case, and the per-vendor status statements CERT/CC collected during coordination. This is one of the very few genuinely institution-engineered public APIs in the higher-education cohort — it is not a repository platform, not a library discovery layer, and not a vendor tenancy. CMU publishes no OpenAPI for it; this document was derived from live probes.'
+  description: Public, unauthenticated read API for the CERT Coordination Center's Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University.
   termsOfService: https://www.sei.cmu.edu/legal/
   contact:
     name: CERT Coordination Center — Software Engineering Institute, Carnegie Mellon University
@@ -20,13 +20,13 @@ servers:
 - url: https://kb.cert.org
   description: Production — CERT/CC Vulnerability Notes, operated by CMU SEI
 tags:
-- name: notes
+- name: Notes
   description: Vulnerability Notes.
 paths:
   /vuls/api/{idnumber}/:
     get:
       tags:
-      - notes
+      - Notes
       operationId: getVulnerabilityNote
       summary: Get a Vulnerability Note by its VU number
       description: Returns the full Vulnerability Note record for the given VU number (the numeric part of VU#nnnnnn, no hash). Unknown or unpublished identifiers return HTTP 200 with a JSON error object, not a 404.
@@ -56,7 +56,7 @@ paths:
   /vuls/api/{idnumber}/vuls/:
     get:
       tags:
-      - notes
+      - Notes
       operationId: listNoteVulnerabilities
       summary: List the CVE records rolled into a Vulnerability Note
       description: Returns the individual vulnerabilities (CVE identifiers with descriptions) that the named coordination case covers. A single Vulnerability Note routinely covers several CVEs.
@@ -85,10 +85,6 @@ paths:
                 date_added: '2024-04-03T17:15:19Z'
 components:
   examples:
-    ErrorExample:
-      summary: Unknown identifier, returned with HTTP 200 (probed 2026-08-19)
-      value:
-        error: Content requested either does not exist or you do not have permissions to view it!
     VulnerabilityNoteExample:
       summary: VU#421644 (probed 2026-08-19)
       value:
@@ -96,6 +92,10 @@ components:
         idnumber: '421644'
         name: HTTP/2 CONTINUATION frames can be utilized for DoS attacks
         keywords: null
+    ErrorExample:
+      summary: Unknown identifier, returned with HTTP 200 (probed 2026-08-19)
+      value:
+        error: Content requested either does not exist or you do not have permissions to view it!
   schemas:
     NoteVulnerability:
       type: object
@@ -125,6 +125,12 @@ components:
           - string
           - 'null'
           format: date-time
+    Error:
+      type: object
+      description: The API's single, undifferentiated error object. It is returned with HTTP 200 for a valid-shaped but unknown identifier, and it does not distinguish "not found" from "not permitted".
+      properties:
+        error:
+          type: string
     VulnerabilityNote:
       type: object
       description: A CERT/CC Vulnerability Note. Field names are the API's own, verbatim.
@@ -343,9 +349,3 @@ components:
           type:
           - string
           - 'null'
-    Error:
-      type: object
-      description: The API's single, undifferentiated error object. It is returned with HTTP 200 for a valid-shaped but unknown identifier, and it does not distinguish "not found" from "not permitted".
-      properties:
-        error:
-          type: string

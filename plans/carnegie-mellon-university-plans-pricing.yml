@@ -4,23 +4,32 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Carnegie Mellon University
 providerId: carnegie-mellon-university
 created: '2026-06-03'
-modified: '2026-06-03'
-reconciled: false
+modified: '2026-08-19'
+reconciled: true
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of every CMU-operated surface on 2026-08-19, plus
+  authentication/carnegie-mellon-university-authentication.yml.
+x-operator: institution
 tags:
 - Education
 - Higher Education
 - University
 - Plans
 description: >-
-  Carnegie Mellon University is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
+  Carnegie Mellon University is a non-commercial higher-education institution and sells no API
+  access. All three surfaces it operates are free and require no registration of any kind: the Delphi
+  Epidata API, the CERT/CC Vulnerability Notes API and the Library Publishing Service API were each
+  probed anonymously on 2026-08-19 and returned real payloads with no key, token or account. There is
+  no signup, no plan page, no quota and no upgrade path, because there is no product. The only
+  credentialed access boundary CMU operates is SAML attribute release through Web Login, which gates
+  affiliation-scoped services rather than metering an API. Corrected 2026-08-19: the previous version
+  described access "typically for non-commercial use", which was figshare's licensing posture read
+  onto CMU — none of CMU's own surfaces states a non-commercial restriction.
 notes: >-
-  No published per-seat or per-call commercial pricing. "Free / Open" reflects open
-  public endpoints; "Affiliation / Credentialed" reflects access gated by institutional
-  identity rather than payment.
+  No pricing exists to record. "Free / Open" is literal — anonymous and unmetered.
+  "Affiliation / Credentialed" is SAML-gated institutional access, not a paid tier.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/refs/heads/main/apis.yml
 plans:

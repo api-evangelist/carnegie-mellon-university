@@ -4,19 +4,34 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Carnegie Mellon University
 providerId: carnegie-mellon-university
 created: '2026-06-03'
-modified: '2026-06-03'
-reconciled: false
+modified: '2026-08-19'
+reconciled: true
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of https://api.delphi.cmu.edu/epidata, https://kb.cert.org/vuls/api and
+  https://lps.library.cmu.edu/api on 2026-08-19, plus the prose documentation at
+  https://cmu-delphi.github.io/delphi-epidata/.
+x-operator: institution
 tags:
 - Education
 - Higher Education
 - University
 - Rate Limiting
 description: >-
-  Carnegie Mellon University does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+  Carnegie Mellon University publishes no rate-limit table for any API it operates, and no rate-limit
+  headers were observed on any of the three institution-operated surfaces probed on 2026-08-19. The
+  three surfaces come from three unrelated units and share no throttling policy: the Delphi Epidata
+  API asks in prose only that heavy users be considerate; the CERT/CC Vulnerability Notes API states
+  nothing at all; the Library Publishing Service's Django REST Framework endpoints paginate at a
+  default limit of 100 with limit/offset, which bounds page size but is not a rate limit. The OAI-PMH
+  provider uses resumptionToken pagination and, like most OAI-PMH providers, will throttle
+  inconsiderate harvesting even though nothing is published about when. Rewritten 2026-08-19; the
+  previous version described "OAI-PMH, IIIF, library" endpoints, and CMU operates no IIIF surface.
+notes: >-
+  No published limits and no observed 429s or X-RateLimit headers. Harvest politely, honor
+  Retry-After if it ever appears, and expect no advance notice of a limit being introduced —
+  CMU publishes no changelog on any API host.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/refs/heads/main/apis.yml
 responseCodes:

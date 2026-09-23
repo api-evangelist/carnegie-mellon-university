@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Delphi Epidata Fluview API
   version: 4.1.44
-  description: 'Public, anonymously accessible HTTP/JSON API operated by the Delphi research group at Carnegie Mellon University, serving real-time and historical epidemiological surveillance data. Delphi is a CMU research group (Machine Learning Department / Herbert A. Simon building, delphi.cmu.edu) and a former CDC Center of Excellence for Influenza Forecasting. The API is a single-host, query-parameter-driven surface: every endpoint is a GET under /epidata/, every response is a JSON envelope of {epidata, result, message}, and `result` carries Delphi''s own status convention (1 = success, -2 = no results, -1 = bad request) rather than relying on the HTTP status code alone. CMU publishes no OpenAPI, GraphQL schema or machine-readable contract for this API; this document was derived from live probes and from the prose documentation at cmu-delphi.github.io/delphi-epidata.'
+  description: Public, anonymously accessible HTTP/JSON API operated by the Delphi research group at Carnegie Mellon University, serving real-time and historical epidemiological surveillance data.
   termsOfService: https://cmu-delphi.github.io/delphi-epidata/
   contact:
     name: Carnegie Mellon University — Delphi Research Group
@@ -72,6 +72,26 @@ paths:
                 missingParameter:
                   $ref: '#/components/examples/MissingParameter'
 components:
+  examples:
+    FluviewRecord:
+      summary: National ILI, epiweek 202001 (probed 2026-08-19)
+      value:
+        epidata:
+        - release_date: '2021-10-08'
+          region: nat
+          issue: 202139
+          epiweek: 202001
+          lag: 91
+          num_ili: 88731
+          num_patients: 2394018
+        result: 1
+        message: success
+    MissingParameter:
+      summary: Error returned with HTTP 200 (probed 2026-08-19)
+      value:
+        epidata: []
+        message: 'missing parameter: need [epiweeks, regions]'
+        result: -1
   schemas:
     EpidataEnvelope:
       type: object
@@ -98,23 +118,3 @@ components:
           type: string
           description: '`success`, `no results`, or a human-readable parameter error.'
           example: success
-  examples:
-    MissingParameter:
-      summary: Error returned with HTTP 200 (probed 2026-08-19)
-      value:
-        epidata: []
-        message: 'missing parameter: need [epiweeks, regions]'
-        result: -1
-    FluviewRecord:
-      summary: National ILI, epiweek 202001 (probed 2026-08-19)
-      value:
-        epidata:
-        - release_date: '2021-10-08'
-          region: nat
-          issue: 202139
-          epiweek: 202001
-          lag: 91
-          num_ili: 88731
-          num_patients: 2394018
-        result: 1
-        message: success

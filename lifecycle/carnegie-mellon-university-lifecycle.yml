@@ -1,0 +1,76 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes on 2026-08-19 of CMU-operated hosts and of the GitHub repositories behind the two
+  institution-operated APIs.
+provider: Carnegie Mellon University
+providerId: carnegie-mellon-university
+summary:
+  status_page: absent
+  deprecation_policy: absent
+  versioning: partial
+  changelog: partial
+description: >-
+  Carnegie Mellon operates no status page, no deprecation policy and no published API lifecycle
+  commitment for any surface it runs. What lifecycle signal exists is emitted by the individual
+  research groups through their source repositories, not by the university. This file records what
+  was found and, more usefully, what was confirmed absent.
+versioning:
+- surface: https://api.delphi.cmu.edu/epidata
+  operator: institution
+  scheme: service-version endpoint
+  detail: >-
+    The Delphi Epidata service exposes its own deployed version at /epidata/version, which
+    returned {"version":"4.1.44"} on 2026-08-19. This is a genuinely useful operational signal and
+    rarer than it should be. It is a service version, not an API contract version — there is no
+    versioned base path, no media-type versioning and no header negotiation, so a breaking change
+    to a response shape would arrive without a version boundary for clients to pin to.
+  evidence:
+    url: https://api.delphi.cmu.edu/epidata/version
+    status: 200
+- surface: https://kb.cert.org/vuls/api
+  operator: institution
+  scheme: none
+  detail: >-
+    No version is expressed anywhere in the CERT/CC Vulnerability Notes API — not in the path,
+    not in a header, not in a metadata endpoint. Individual Vulnerability Notes carry their own
+    `revision` counter and `dateupdated`, which versions the DATA but not the interface.
+changelog:
+- surface: https://api.delphi.cmu.edu/epidata
+  operator: institution
+  url: https://github.com/cmu-delphi/delphi-epidata/releases
+  detail: >-
+    Change history for the Delphi Epidata service lives in its GitHub releases, published by the
+    Delphi research group. There is no changelog on the API host and none linked from
+    api.delphi.cmu.edu.
+- surface: https://kb.cert.org/vuls/api
+  operator: institution
+  url: https://kb.cert.org/vuls/atomfeed/
+  detail: >-
+    The Atom feed of recently published Vulnerability Notes is a change feed for the DATA, and it
+    is a real, machine-readable one. There is no changelog for the API itself.
+  evidence:
+    url: https://kb.cert.org/vuls/atomfeed/
+    status: 200
+    content_type: application/atom+xml
+status_page:
+  present: false
+  detail: >-
+    status.cmu.edu does not resolve (NXDOMAIN, probed 2026-08-19). No status or uptime surface was
+    found for api.delphi.cmu.edu, kb.cert.org or login.cmu.edu.
+deprecation:
+  policy_published: false
+  detail: >-
+    No deprecation or sunset policy is published for any CMU-operated API. The cohort has a
+    worked example of what that costs: api.heinz.cmu.edu/courses_api/course_list/, catalogued in
+    June 2026 as a course API, now serves an HTML page (200, text/html on 2026-08-19) with no
+    deprecation notice, no Sunset header and no redirect to a successor. The API did not announce
+    its retirement; it simply stopped being an API.
+  observed_retirements:
+  - surface: https://api.heinz.cmu.edu/courses_api/course_list/
+    last_known_api: 2026-06-03 (already 302-redirecting at first profile)
+    status_2026_08_19: 200 text/html
+    detail: Heinz College course list API, retired without notice.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

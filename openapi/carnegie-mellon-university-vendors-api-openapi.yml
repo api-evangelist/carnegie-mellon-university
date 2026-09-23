@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: CERT/CC Vulnerability Notes Vendors API
   version: '1.0'
-  description: 'Public, unauthenticated read API for the CERT Coordination Center''s Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University. Each Vulnerability Note (VU#nnnnnn) is the published result of a coordinated vulnerability disclosure case: overview, impact, resolution, affected systems, CVSS metrics, the CVE identifiers rolled into the case, and the per-vendor status statements CERT/CC collected during coordination. This is one of the very few genuinely institution-engineered public APIs in the higher-education cohort — it is not a repository platform, not a library discovery layer, and not a vendor tenancy. CMU publishes no OpenAPI for it; this document was derived from live probes.'
+  description: Public, unauthenticated read API for the CERT Coordination Center's Vulnerability Notes database, operated by the CERT Division of the Software Engineering Institute at Carnegie Mellon University.
   termsOfService: https://www.sei.cmu.edu/legal/
   contact:
     name: CERT Coordination Center — Software Engineering Institute, Carnegie Mellon University
@@ -20,13 +20,13 @@ servers:
 - url: https://kb.cert.org
   description: Production — CERT/CC Vulnerability Notes, operated by CMU SEI
 tags:
-- name: vendors
+- name: Vendors
   description: Per-vendor coordination status.
 paths:
   /vuls/api/{idnumber}/vendors/:
     get:
       tags:
-      - vendors
+      - Vendors
       operationId: listNoteVendors
       summary: List vendor coordination statements for a Vulnerability Note
       description: Returns every vendor CERT/CC contacted during coordination of the case, when they were contacted, their published statement (if any) and when it was last updated. This is the machine-readable form of the coordinated-disclosure record and is the part of the API with no equivalent anywhere else.

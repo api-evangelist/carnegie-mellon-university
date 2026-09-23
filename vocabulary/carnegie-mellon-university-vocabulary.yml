@@ -1,53 +1,120 @@
-vocabulary:
-  name: Carnegie Mellon University KiltHub Repository Vocabulary
-  description: >-
-    Controlled vocabulary for the core objects and fields exposed by the
-    figshare v2 REST API that backs Carnegie Mellon University's KiltHub
-    institutional repository. Terms are derived directly from the figshare
-    OpenAPI definition (articles, authors, categories, files, license, timeline).
-  version: "1.0.0"
+generated: '2026-08-19'
+method: derived
+source: >-
+  openapi/carnegie-mellon-university-delphi-epidata-openapi.yml,
+  openapi/carnegie-mellon-university-cert-vulnerability-notes-openapi.yml,
+  openapi/carnegie-mellon-university-library-publishing-openapi.yml,
+  json-schema/*.json — all of which were themselves derived from live probes on 2026-08-19.
+provider: Carnegie Mellon University
+providerId: carnegie-mellon-university
+description: >-
+  The vocabulary actually used across the three API surfaces Carnegie Mellon University operates
+  itself. It is deliberately three disconnected vocabularies rather than one: a university is a
+  federation, and CMU's public APIs come from three unrelated units — the Delphi research group,
+  the CERT Coordination Center at the Software Engineering Institute, and University Libraries.
+  There is no shared identifier, no shared envelope and no shared error model between them. This
+  file replaces the 2026-06 vocabulary, which was figshare's object model (article, collection,
+  author, project, institution) recorded as Carnegie Mellon's.
+domains:
+- name: Epidemiological surveillance
+  unit: Delphi Research Group
+  operator: institution
+  surface: https://api.delphi.cmu.edu/epidata
   terms:
-    - term: Article
-      definition: >-
-        A research output deposited in KiltHub (dataset, media, paper, poster,
-        software, etc.); the primary citable record exposed by the API.
-      tags: [object, research-output, core]
-    - term: doi
-      definition: Persistent Digital Object Identifier assigned to the article.
-      tags: [identifier, persistent]
-    - term: handle
-      definition: Handle System persistent identifier for the article.
-      tags: [identifier, persistent]
-    - term: defined_type_name
-      definition: Human-readable name of the article type (dataset, media, paper, software, etc.).
-      tags: [classification]
-    - term: citation
-      definition: Formatted citation string for the research output.
-      tags: [metadata, scholarly]
-    - term: timeline
-      definition: Publication timeline including firstOnline and publisher publication/acceptance dates.
-      tags: [object, dates]
-    - term: license
-      definition: License object (value, name, url) describing reuse terms, e.g. CC BY 4.0.
-      tags: [object, rights]
-    - term: Category
-      definition: Subject classification term from a figshare taxonomy applied to an article.
-      tags: [object, classification, taxonomy]
-    - term: Author
-      definition: A contributor to an article, including full_name and ORCID identifier.
-      tags: [object, person]
-    - term: orcid_id
-      definition: ORCID persistent researcher identifier for an author.
-      tags: [identifier, person]
-    - term: PublicFile
-      definition: A downloadable file attached to a public article, with md5 checksums and download_url.
-      tags: [object, file]
-    - term: is_embargoed
-      definition: Boolean indicating whether the article's files are currently under embargo.
-      tags: [status, boolean]
-    - term: is_metadata_record
-      definition: Boolean indicating the article is a metadata-only record with no deposited files.
-      tags: [status, boolean]
-    - term: institution
-      definition: figshare institution/portal identifier used to scope searches to CMU (portal_231).
-      tags: [scope, institution]
+  - term: epiweek
+    definition: >-
+      A CDC MMWR epidemiological week encoded as the integer YYYYWW. The primary time key across
+      every Delphi endpoint; not an ISO week.
+  - term: signal
+    definition: A named indicator time series within a data_source, e.g. confirmed_incidence_num.
+  - term: data_source
+    definition: The provider of a family of signals, e.g. jhu-csse, fb-survey, doctor-visits.
+  - term: geo_type
+    definition: 'Geographic resolution of an observation: county, hrr, msa, dma, state, hhs, nation.'
+  - term: geo_value
+    definition: The identifier of a location at the requested geo_type, or `*` for all.
+  - term: issue
+    definition: >-
+      The epiweek in which a given revision of a record was published. Delphi is revision-aware:
+      the same epiweek can be reported many times as data backfills.
+  - term: lag
+    definition: Weeks elapsed between the observed epiweek and the issue that reported it.
+  - term: result
+    definition: >-
+      Delphi's own status integer carried in the response body — 1 success, -2 no results, -1 bad
+      request. It is NOT an HTTP status, and the HTTP status is 200 in all three cases.
+  - term: wili
+    definition: Weighted influenza-like-illness percentage, the headline ILINet measure.
+- name: Coordinated vulnerability disclosure
+  unit: CERT Coordination Center, Software Engineering Institute
+  operator: institution
+  surface: https://kb.cert.org/vuls/api
+  terms:
+  - term: Vulnerability Note
+    definition: >-
+      The published record of a coordinated disclosure case, identified as VU#nnnnnn. Not the
+      same unit as a CVE — one Note routinely covers many CVEs.
+  - term: vuid
+    definition: The Vulnerability Note identifier in display form, e.g. VU#421644.
+  - term: idnumber
+    definition: The same identifier as a bare six-digit string; this is what the API path takes.
+  - term: vendor statement
+    definition: >-
+      A vendor's own published position on a Note, with the date CERT/CC first contacted them.
+      The machine-readable trace of the coordination process itself, and the part of this API
+      with no equivalent anywhere else.
+  - term: contact_date
+    definition: When CERT/CC notified a given vendor about the case.
+  - term: revision
+    definition: Monotonic counter of edits to a published Note.
+  - term: cam_*
+    definition: >-
+      CERT's Common Advisory Metric fields (widelyknown, exploitation, internetinfrastructure,
+      population, impact, easeofexploitation, attackeraccessrequired) and the composite
+      cam_scorecurrent values derived from them — CERT's own prioritisation vocabulary, predating
+      and distinct from CVSS.
+  - term: vrda_d1_*
+    definition: >-
+      Vulnerability Response Decision Assistance decision-point fields (directreport, population,
+      impact) — the CERT decision framework whose successor is SSVC.
+- name: Scholarly publishing
+  unit: University Libraries — Library Publishing Service
+  operator: institution
+  surface: https://lps.library.cmu.edu/api
+  terms:
+  - term: journal
+    definition: >-
+      A publication CMU Libraries publishes, keyed by a short code (LDR, ETHOS, MAJAL, NCMR, TSJ)
+      that also names its subdomain.
+  - term: issue
+    definition: A dated collection of articles within a journal.
+  - term: article
+    definition: A published item with title, subtitle and HTML abstract.
+  - term: preprint
+    definition: A repository object in the preprint workflow, prior to journal publication.
+  - term: repository_field
+    definition: A configurable metadata field on the preprint repository.
+  - term: version_queue
+    definition: Pending version submissions awaiting editorial action.
+  - term: metadataPrefix
+    definition: >-
+      The OAI-PMH metadata format requested. CMU's provider advertises two, `oai_dc` and `jats`.
+  - term: resumptionToken
+    definition: OAI-PMH pagination cursor for ListRecords and ListIdentifiers.
+cross_cutting:
+- term: operator
+  definition: >-
+    Not CMU's word — API Evangelist's. Recorded on every surface in this repo because the
+    university's genuinely-owned APIs (three) are outnumbered by the machine-readable surfaces
+    that merely carry its name (figshare, Instructure, Ex Libris).
+excluded:
+- vocabulary: figshare object model
+  operator: vendor
+  terms_removed: [article, collection, author, project, institution, altmetric, symplectic, profile]
+  detail: >-
+    Removed 2026-08-19. These are figshare's product nouns, published identically for every
+    figshare customer, and the June 2026 profile recorded them as Carnegie Mellon University's
+    vocabulary because the spec they came from was sitting in CMU's repository.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

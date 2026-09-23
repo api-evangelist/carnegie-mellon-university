@@ -1,0 +1,85 @@
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live error probes of https://api.delphi.cmu.edu/epidata and https://kb.cert.org/vuls/api on
+  2026-08-19. Carnegie Mellon publishes no error reference for either surface; every entry below
+  is an observed response, not a documented one.
+provider: Carnegie Mellon University
+providerId: carnegie-mellon-university
+apis:
+- aid: carnegie-mellon-university:delphi-epidata
+  operator: institution
+  envelope:
+    shape: '{"epidata": [], "message": "<human message>", "result": <int>}'
+    content_type: application/json
+    note: >-
+      The success envelope is the same shape with a populated `epidata` array, message "success"
+      and result 1. Delphi carries its status in `result`, not in the HTTP status line.
+  errors:
+  - status: 200
+    result: -1
+    message: 'missing parameter: need [epiweeks, regions]'
+    trigger: A required query parameter is absent (probed against /fluview/ with no parameters).
+    evidence:
+      url: https://api.delphi.cmu.edu/epidata/fluview/
+      status: 200
+    note: >-
+      This is the important one. A bad request is served with HTTP 200. Any client, agent or
+      pipeline that branches on `response.ok` will treat a malformed query as a successful empty
+      result and silently under-report. The failure is only visible in the body.
+  - status: 200
+    result: -2
+    message: no results
+    trigger: A well-formed query that matches no rows.
+    note: Distinguished from -1 only by the result code; the HTTP status is again 200.
+  - status: 404
+    trigger: An unknown path under /epidata/, e.g. /epidata/openapi.json.
+    content_type: text/html
+    note: Unknown paths fall through to an HTML 404 rather than the JSON envelope.
+    evidence:
+      url: https://api.delphi.cmu.edu/epidata/openapi.json
+      status: 404
+- aid: carnegie-mellon-university:cert-vulnerability-notes
+  operator: institution
+  envelope:
+    shape: '{"error": "<single undifferentiated message>"}'
+    content_type: application/json
+  errors:
+  - status: 200
+    message: Content requested either does not exist or you do not have permissions to view it!
+    trigger: >-
+      A valid-shaped but unknown or unpublished Vulnerability Note identifier, and also every
+      unmodelled path under /vuls/api/ — /vuls/api/, /vuls/api/summary/, /vuls/api/docs/ and
+      /vuls/api/1234/ all return this identical object.
+    evidence:
+      url: https://kb.cert.org/vuls/api/1234/
+      status: 200
+    note: >-
+      Two distinct defects in one response. First, a not-found is served with HTTP 200. Second,
+      the message conflates "does not exist" with "you do not have permission", so a client
+      cannot tell a typo from an authorization boundary, and cannot tell either from an
+      unimplemented endpoint. This is why the OpenAPI in this repo models only the four paths
+      that returned real payloads: the error object is indistinguishable from a 404, so
+      path discovery by probing is impossible here.
+  - status: 404
+    trigger: >-
+      Paths outside /vuls/api/ that the Django router does not match, e.g.
+      /vuls/api/{id}/vendors/all/ or /vuls/api/summary/2026/.
+    content_type: text/html
+    note: These return the kb.cert.org HTML 404 page, not the JSON error object.
+    evidence:
+      url: https://kb.cert.org/vuls/api/summary/2026/
+      status: 404
+negative_probes:
+- url: https://apps.studentaffairs.cmu.edu/dining/conceptinfo/zzz-nonsense-xyz
+  status: 200
+  verdict: soft-200
+  detail: >-
+    CMU Dining's Concept Info application is a Blazor Server app whose catch-all route returns
+    the SPA shell with HTTP 200 for every path, including deliberate nonsense. /api/Concepts,
+    /api/concepts, /Concepts/GetConcepts and /api/v1/Concepts all "return 200" and all return
+    HTML. There is no JSON API here; the 200s are the failure mode this pipeline warns about,
+    and nothing from this host was credited to CMU.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
