@@ -449,8 +449,8 @@ apis:
 - aid: carnegie-mellon-university:carnegie-mellon-university-oai-pmh-api
   name: Carnegie Mellon University Oai Pmh API
   description: OAI-PMH 2.0 metadata harvesting provider.
-  humanURL: https://cmu-delphi.github.io/delphi-epidata/
-  baseURL: https://api.delphi.cmu.edu/epidata
+  humanURL: https://lps.library.cmu.edu/
+  baseURL: https://lps.library.cmu.edu/api/oai/
   tags:
   - OAI-PMH
   tags_raw:

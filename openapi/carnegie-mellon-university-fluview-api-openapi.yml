@@ -73,6 +73,12 @@ paths:
                   $ref: '#/components/examples/MissingParameter'
 components:
   examples:
+    MissingParameter:
+      summary: Error returned with HTTP 200 (probed 2026-08-19)
+      value:
+        epidata: []
+        message: 'missing parameter: need [epiweeks, regions]'
+        result: -1
     FluviewRecord:
       summary: National ILI, epiweek 202001 (probed 2026-08-19)
       value:
@@ -86,12 +92,6 @@ components:
           num_patients: 2394018
         result: 1
         message: success
-    MissingParameter:
-      summary: Error returned with HTTP 200 (probed 2026-08-19)
-      value:
-        epidata: []
-        message: 'missing parameter: need [epiweeks, regions]'
-        result: -1
   schemas:
     EpidataEnvelope:
       type: object
