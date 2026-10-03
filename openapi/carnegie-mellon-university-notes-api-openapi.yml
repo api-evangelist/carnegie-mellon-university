@@ -84,25 +84,7 @@ paths:
                 case_increment: 1
                 date_added: '2024-04-03T17:15:19Z'
 components:
-  examples:
-    ErrorExample:
-      summary: Unknown identifier, returned with HTTP 200 (probed 2026-08-19)
-      value:
-        error: Content requested either does not exist or you do not have permissions to view it!
-    VulnerabilityNoteExample:
-      summary: VU#421644 (probed 2026-08-19)
-      value:
-        vuid: VU#421644
-        idnumber: '421644'
-        name: HTTP/2 CONTINUATION frames can be utilized for DoS attacks
-        keywords: null
   schemas:
-    Error:
-      type: object
-      description: The API's single, undifferentiated error object. It is returned with HTTP 200 for a valid-shaped but unknown identifier, and it does not distinguish "not found" from "not permitted".
-      properties:
-        error:
-          type: string
     NoteVulnerability:
       type: object
       properties:
@@ -131,6 +113,12 @@ components:
           - string
           - 'null'
           format: date-time
+    Error:
+      type: object
+      description: The API's single, undifferentiated error object. It is returned with HTTP 200 for a valid-shaped but unknown identifier, and it does not distinguish "not found" from "not permitted".
+      properties:
+        error:
+          type: string
     VulnerabilityNote:
       type: object
       description: A CERT/CC Vulnerability Note. Field names are the API's own, verbatim.
@@ -349,3 +337,15 @@ components:
           type:
           - string
           - 'null'
+  examples:
+    ErrorExample:
+      summary: Unknown identifier, returned with HTTP 200 (probed 2026-08-19)
+      value:
+        error: Content requested either does not exist or you do not have permissions to view it!
+    VulnerabilityNoteExample:
+      summary: VU#421644 (probed 2026-08-19)
+      value:
+        vuid: VU#421644
+        idnumber: '421644'
+        name: HTTP/2 CONTINUATION frames can be utilized for DoS attacks
+        keywords: null
