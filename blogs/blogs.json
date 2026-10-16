@@ -9,11 +9,11 @@
       "method": "discovered"
     },
     {
-      "source": "https://www.cmu.edu/computing/support/",
-      "feed_url": "https://www.cmu.edu/computing/support/",
+      "source": "https://insights.sei.cmu.edu/",
+      "feed_url": "https://insights.sei.cmu.edu/atom.xml",
       "title": "",
-      "saved": 0,
-      "method": "none"
+      "saved": 1,
+      "method": "discovered"
     },
     {
       "source": "https://www.cmu.edu/news/rss.xml",
@@ -21,8 +21,15 @@
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://www.cmu.edu/computing/support/",
+      "feed_url": "https://www.cmu.edu/computing/support/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "post_count": 1,
+  "fetched": "2026-10-10T13:15:00Z"
 }
