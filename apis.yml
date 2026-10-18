@@ -139,7 +139,7 @@ apis:
   humanURL: https://canvas.cmu.edu/
   baseURL: https://canvas.cmu.edu/api/lti
   tags:
-  - Learning Management
+  - LMS
   - LTI
   - Tenants
   tags_raw:
