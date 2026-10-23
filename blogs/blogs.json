@@ -12,12 +12,19 @@
       "source": "https://insights.sei.cmu.edu/",
       "feed_url": "https://insights.sei.cmu.edu/atom.xml",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
     },
     {
       "source": "https://www.cmu.edu/news/rss.xml",
       "feed_url": "https://www.cmu.edu/news/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://insights.sei.cmu.edu/atom.xml",
+      "feed_url": "https://insights.sei.cmu.edu/atom.xml",
       "title": "",
       "saved": 0,
       "method": "feed"
@@ -30,6 +37,6 @@
       "method": "none"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 20,
+  "fetched": "2026-10-17T14:53:57Z"
 }
