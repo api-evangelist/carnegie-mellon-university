@@ -3,7 +3,8 @@
   "sources": [
     "_original/carnegie-mellon-university-cert-vulnerability-notes-openapi.yml",
     "_original/carnegie-mellon-university-delphi-epidata-openapi.yml",
-    "_original/carnegie-mellon-university-library-publishing-openapi.yml"
+    "_original/carnegie-mellon-university-library-publishing-openapi.yml",
+    "_original/carnegie-mellon-university-openapi.json"
   ],
   "outputs": [
     "carnegie-mellon-university-feeds-api-openapi.yml",
@@ -17,18 +18,39 @@
     "carnegie-mellon-university-issues-api-openapi.yml",
     "carnegie-mellon-university-journals-api-openapi.yml",
     "carnegie-mellon-university-oai-pmh-api-openapi.yml",
-    "carnegie-mellon-university-preprints-api-openapi.yml"
+    "carnegie-mellon-university-preprints-api-openapi.yml",
+    "carnegie-mellon-university-altmetric-api-openapi.yml",
+    "carnegie-mellon-university-authors-api-openapi.yml",
+    "carnegie-mellon-university-collections-api-openapi.yml",
+    "carnegie-mellon-university-institutions-api-openapi.yml",
+    "carnegie-mellon-university-oauth-api-openapi.yml",
+    "carnegie-mellon-university-other-api-openapi.yml",
+    "carnegie-mellon-university-profiles-api-openapi.yml",
+    "carnegie-mellon-university-projects-api-openapi.yml",
+    "carnegie-mellon-university-symplectic-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "3 archived document(s) dropped as subsets of other archived documents",
-    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "carnegie-mellon-university-cert-vulnerability-notes-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "carnegie-mellon-university-delphi-epidata-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "carnegie-mellon-university-library-publishing-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "carnegie-mellon-university-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "carnegie-mellon-university-openapi.json: declared missing tag: altmetric",
+    "carnegie-mellon-university-openapi.json: declared missing tag: articles",
+    "carnegie-mellon-university-openapi.json: declared missing tag: authors",
+    "carnegie-mellon-university-openapi.json: declared missing tag: collections",
+    "carnegie-mellon-university-openapi.json: declared missing tag: institutions",
+    "carnegie-mellon-university-openapi.json: declared missing tag: oauth",
+    "carnegie-mellon-university-openapi.json: declared missing tag: other",
+    "carnegie-mellon-university-openapi.json: declared missing tag: profiles",
+    "carnegie-mellon-university-openapi.json: declared missing tag: projects",
+    "carnegie-mellon-university-openapi.json: declared missing tag: symplectic",
+    "tag 'articles' spans 2 source specs (carnegie-mellon-university-library-publishing-openapi.yml, carnegie-mellon-university-openapi.json): per-path servers applied",
+    "apis.yml register: written (+9 apis, 25 total)"
   ],
   "skipped": [
     "_original/carnegie-mellon-university-library-publishing.yaml: archived document superseded by a larger archived document",
