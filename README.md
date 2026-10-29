@@ -1,4 +1,4 @@
-# Carnegie Mellon University (carnegie-mellon-university)
+# Carnegie Mellon University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,75 +64,173 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Carnegie Mellon University is a private research university in Pittsburgh, Pennsylvania, United States, ranked #50 in the QS World University Rankings 2025. This repository catalogs CMU's public developer and API footprint as an [APIs.json](https://apisjson.org) provider profile. CMU has no single central developer portal; its strongest public API presence is in research and library infrastructure — most notably the Delphi Epidata API and the KiltHub institutional repository.
+Carnegie Mellon University is a private research university in Pittsburgh, Pennsylvania, ranked 49th in the QS World University Rankings. It operates no central developer portal, no API gateway and no institution-wide developer program — api.cmu.edu and data.cmu.edu do not exist as developer surfaces — but unlike most of this cohort it does genuinely engineer public APIs, in three unrelated units that share no identifier, envelope or error model. The Delphi research group runs the Delphi Epidata API for real-time epidemiological surveillance; the CERT Coordination Center at the Software Engineering Institute runs the Vulnerability Notes API, the machine-readable record of coordinated vulnerability disclosure; and University Libraries self-hosts the Library Publishing Service, five open-access journals behind a REST API and a conformant OAI-PMH 2.0 provider on CMU's own hardware. None of the three publishes an OpenAPI, a changelog on the API host, a status page or a deprecation policy, and both research APIs return errors with HTTP 200. Everything else that carries CMU's name is a tenancy: KiltHub is figshare, Canvas is Instructure, and the eleven figshare-derived contracts this profile held until 2026-08-19 were a vendor's engineering credited to the university.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/carnegie-mellon-university/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=carnegie-mellon-university-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · United States · Private Research University · Research · Epidemiology · Public Health · Cybersecurity · Vulnerability Disclosure · Scholarly Publishing · Institutional Repository
 
-## Type
+## Carnegie Mellon University on APIs.io
 
-- Index / Producer / Public — `x-type: university`, `x-category: Private Research University`
+Everything profiled for Carnegie Mellon University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/carnegie-mellon-university/](https://apis.io/providers/carnegie-mellon-university/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (16)
 
-University, Higher Education, Education, United States, Private Research University, Research, Epidemiology, Public Health, Cybersecurity, Vulnerability Disclosure, Scholarly Publishing, Institutional Repository, Identity Federation, Open Access, Open Data
+- [CMU Web Login (Shibboleth SAML 2.0 Identity Provider)](https://apis.io/apis/carnegie-mellon-university/web-login-sso/) — Carnegie Mellon's campus-wide single sign-on identity provider, running Shibboleth on CMU's own host and address space (login.cmu.edu, 128.2.42.22). Its…
+- [KiltHub Institutional Repository (figshare) — tenant](https://apis.io/apis/carnegie-mellon-university/kilthub-figshare-tenant/) — KiltHub is Carnegie Mellon's institutional repository for research data and scholarly output. The data, the collections and the DOIs are CMU's; the…
+- [Canvas LTI 1.3 Advantage (Instructure) — tenant](https://apis.io/apis/carnegie-mellon-university/canvas-lti-tenant/) — CMU's learning management system serves an LTI 1.3 / LTI Advantage JWKS at canvas.cmu.edu/api/lti/security/jwks, so the LTI standard is genuinely in play in…
+- [CMU Eats API (ScottyLabs) — student-operated](https://apis.io/apis/carnegie-mellon-university/cmu-eats-scottylabs/) — A public JSON API for Carnegie Mellon dining locations, hours and menus, built and run by ScottyLabs, a CMU student organization, at api.cmueats.com. It…
+- [Carnegie Mellon University Articles API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-articles-api/) — Published articles.
+- [Carnegie Mellon University Covidcast API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-covidcast-api/) — COVIDcast real-time indicator signals across geographies.
+- [Carnegie Mellon University Feeds API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-feeds-api/) — Syndication.
+- [Carnegie Mellon University Fluview API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-fluview-api/) — US ILINet influenza-like-illness surveillance (CDC FluView).
+- [Carnegie Mellon University Forecasts API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-forecasts-api/) — Delphi's own nowcasts and forecasts.
+- [Carnegie Mellon University Issues API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-issues-api/) — Issues within a journal.
+- [Carnegie Mellon University Journals API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-journals-api/) — The journals CMU Libraries publishes.
+- [Carnegie Mellon University Meta API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-meta-api/) — Service metadata and version.
+- [Carnegie Mellon University Notes API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-notes-api/) — Vulnerability Notes.
+- [Carnegie Mellon University Oai Pmh API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-oai-pmh-api/) — OAI-PMH 2.0 metadata harvesting provider.
+- [Carnegie Mellon University Preprints API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-preprints-api/) — Preprint repository objects.
+- [Carnegie Mellon University Vendors API](https://apis.io/apis/carnegie-mellon-university/carnegie-mellon-university-vendors-api/) — Per-vendor coordination status.
 
-## APIs
+### Published properties
 
-Every surface carries an `x-operator`: **institution** (CMU's own host and engineering), **tenant**
-(CMU's data on a vendor's platform) or **vendor** (not recorded here at all). Re-profiled 2026-08-19
-under the university pipeline.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Institution-operated
+#### Agentic access (1)
 
-- **Delphi Epidata API** (`institution`) — Real-time and historical epidemiological surveillance data (COVIDcast, FluView, Delphi's own forecasts), operated by CMU's Delphi research group. Five endpoints verified live 2026-08-19; `/epidata/version` returned 4.1.44. Errors arrive with HTTP 200 and are signalled only in the body's `result` field. Base: https://api.delphi.cmu.edu/epidata — Docs: https://cmu-delphi.github.io/delphi-epidata/
-- **CERT/CC Vulnerability Notes API** (`institution`) — The machine-readable record of coordinated vulnerability disclosure, operated by the CERT Division of the Software Engineering Institute, an FFRDC operated by Carnegie Mellon. Returns Vulnerability Notes, the CVEs each case covers, and per-vendor coordination statements. Lives on cert.org rather than cmu.edu, which is why the cohort audit could not see it. Base: https://kb.cert.org/vuls/api — Docs: https://certcc.github.io/
-- **CMU Library Publishing Service API + OAI-PMH** (`institution`) — REST API and conformant OAI-PMH 2.0 provider for the five open-access journals University Libraries publishes. Self-hosted at 128.2.24.32, inside CMU's own /16 — the institution's own machine, not a vendor tenancy. Base: https://lps.library.cmu.edu/api — Site: https://lps.library.cmu.edu/
-- **CMU Web Login (Shibboleth SAML 2.0 IdP)** (`institution`) — Campus-wide SAML identity provider on CMU's own host, publishing readable metadata and registered with InCommon/eduGAIN under the Research & Scholarship entity category. https://login.cmu.edu/idp/shibboleth
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### Tenant relationships
+- [Carnegie Mellon University Agentic Access](https://apis.io/agentic-access/carnegie-mellon-university/carnegie-mellon-university-agentic-access/)
 
-- **KiltHub Institutional Repository** (`tenant`, figshare) — CMU's research data repository. The data and DOIs are CMU's; the platform, API and OAI-PMH endpoint are figshare's. `kilthub.cmu.edu` is a CNAME to `FIGSHARE.COM`; records are harvestable only from `api.figshare.com/v2/oai` using `set=portal_231`. https://kilthub.cmu.edu/
-- **Canvas LTI 1.3 Advantage** (`tenant`, Instructure) — An LTI Advantage JWKS is served on a CMU hostname, but `canvas.cmu.edu` is a CNAME to `CMU-VANITY.INSTRUCTURE.COM`. The courses are CMU's; the LTI engineering is not.
-- **CMU Eats API** (`tenant`, ScottyLabs) — Dining locations, hours and menus, built and run by a CMU student organization at `api.cmueats.com`. It exists because CMU's own dining application is a Blazor catch-all that returns an SPA shell with HTTP 200 for every path, including nonsense. Endorsement by CMU: unverified.
+#### JSON Schema (2)
 
-### Removed 2026-08-19
+The data models the API reads and writes.
 
-Ten figshare-derived OpenAPIs (`altmetric`, `articles`, `authors`, `collections`, `institutions`,
-`oauth`, `other`, `profiles`, `projects`, `symplectic`) and twenty derived Postman/OpenCollection
-files whose every request URL was `api.figshare.com`. They were one vendor contract, split by tag,
-credited to Carnegie Mellon eleven times over — the same document that gave the eight top-scoring
-universities in this catalog an identical agent-readiness score of 38.9.
+- [CERT/CC Vulnerability Note](https://apis.io/schemas/carnegie-mellon-university/carnegie-mellon-university-cert-vulnerability-note/)
+- [Delphi Epidata response envelope](https://apis.io/schemas/carnegie-mellon-university/carnegie-mellon-university-delphi-epidata-envelope/)
 
-## Plans
+#### JSON-LD (1)
 
-- [plans/carnegie-mellon-university-plans-pricing.yml](plans/carnegie-mellon-university-plans-pricing.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Rate Limits
+- [Carnegie Mellon University Context](https://apis.io/jsonld/carnegie-mellon-university/carnegie-mellon-university-context/)
 
-- [rate-limits/carnegie-mellon-university-rate-limits.yml](rate-limits/carnegie-mellon-university-rate-limits.yml)
+#### Vocabulary (1)
 
-## FinOps
+The provider's domain terms, defined.
 
-- [finops/carnegie-mellon-university-finops.yml](finops/carnegie-mellon-university-finops.yml)
+- [Carnegie Mellon University KiltHub Repository Vocabulary](https://apis.io/vocabularies/carnegie-mellon-university/carnegie-mellon-university-vocabulary/)
 
-## Timestamps
+#### Examples (6)
 
-- Created: 2026-06-03
-- Modified: 2026-08-19
+Example requests and responses.
 
-## Common Properties
+- [Carnegie Mellon University Cert Note Cves Example](https://apis.io/examples/carnegie-mellon-university/carnegie-mellon-university-cert-note-cves-example/)
+- [Carnegie Mellon University Cert Vendor Statements Example](https://apis.io/examples/carnegie-mellon-university/carnegie-mellon-university-cert-vendor-statements-example/)
+- [Carnegie Mellon University Cert Vulnerability Note Example](https://apis.io/examples/carnegie-mellon-university/carnegie-mellon-university-cert-vulnerability-note-example/)
+- [Carnegie Mellon University Delphi Covidcast Example](https://apis.io/examples/carnegie-mellon-university/carnegie-mellon-university-delphi-covidcast-example/)
+- [Carnegie Mellon University Delphi Error Example](https://apis.io/examples/carnegie-mellon-university/carnegie-mellon-university-delphi-error-example/)
+- [Carnegie Mellon University Delphi Fluview Example](https://apis.io/examples/carnegie-mellon-university/carnegie-mellon-university-delphi-fluview-example/)
 
-- Website: https://www.cmu.edu/
-- GitHub: https://github.com/cmu-delphi
-- SourceCode: https://github.com/cmu-lib
-- LinkedIn: https://www.linkedin.com/school/carnegie-mellon-university/
-- Authentication: https://www.cmu.edu/computing/services/security/identity-access/authentication/sso-provider.html
+#### Governance rules (2)
 
-## Notes
+Spectral rulesets for the provider's contracts.
 
-All endpoints were probed during cataloging on 2026-06-03. The Delphi Epidata API and KiltHub OAI-PMH endpoint were verified returning live data. The former Heinz College `courses_api` now 302-redirects to a student web page and is no longer a usable public API, so it was excluded. The Schedule of Classes is a servlet-based web UI, not a documented API, and was not cataloged as an API. No endpoints were fabricated — only URLs and properties verified to resolve are included.
+- [Carnegie Mellon University — jsonschema rules](https://apis.io/rules/carnegie-mellon-university/carnegie-mellon-university-jsonschema-spectral-rules/)
+- [Carnegie Mellon University API Rules](https://apis.io/rules/carnegie-mellon-university/carnegie-mellon-university-rules/)
 
-## Maintainers
+#### Security (2)
 
-- Kin Lane — kin@apievangelist.com
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Carnegie Mellon University Authentication](https://apis.io/security/carnegie-mellon-university/carnegie-mellon-university-authentication/)
+- [Carnegie Mellon University Domain Security](https://apis.io/security/carnegie-mellon-university/carnegie-mellon-university-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Carnegie Mellon University Scopes](https://apis.io/scopes/carnegie-mellon-university/carnegie-mellon-university-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Carnegie Mellon University Plans Pricing](https://apis.io/plans/carnegie-mellon-university/carnegie-mellon-university-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Carnegie Mellon University Rate Limits](https://apis.io/rate-limits/carnegie-mellon-university/carnegie-mellon-university-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Carnegie Mellon University Finops](https://apis.io/finops/carnegie-mellon-university/carnegie-mellon-university-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.cmu.edu/)
+- [Documentation](https://cmu-delphi.github.io/delphi-epidata/)
+- [API reference](https://cmu-delphi.github.io/delphi-epidata/api/README.html)
+- [Support](https://www.cmu.edu/computing/support/)
+- [Blog](https://www.cmu.edu/news/)
+- [Terms of service](https://www.cmu.edu/legal/)
+- [Privacy policy](https://www.cmu.edu/legal/privacy-notice)
+- [GitHub](https://github.com/cmu-delphi)
+
+## API Evangelist rating
+
+**Kin Score 36.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 23.5 |
+| Contract governance | 17.4 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 42.1 |
+
+**Agent readiness 32.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 34.3** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/carnegie-mellon-university/](https://apis.io/providers/carnegie-mellon-university/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Carnegie Mellon University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/carnegie-mellon-university/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
